@@ -1,18 +1,17 @@
 import React, {Component} from "react";
-import {Navigate} from "react-router-dom";
 // import {clearAuth, login} from "../actions/auth";
 import {connect} from "react-redux";
 import { Link } from "react-router-dom";
-
+import SECRET from "../../credentials/credentials";
 // Material UI
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { Paper } from "@mui/material";
+import { GoogleLogin } from 'react-google-login';
+import axios from 'axios';
 
 class Login extends Component {
 
@@ -20,12 +19,26 @@ class Login extends Component {
     componentWillUnmount() {
         // this.props.dispatch(clearAuth());
     }
+    
 
     render() {
         // const {inProgress, error, isLoggedIn} = this.props.auth;
         // if (isLoggedIn) {
         //     return <Navigate to="/"/>;
         // }
+        const responseSuccessGoogle = (response) => {
+            console.log("Success in google login",response);
+            axios({
+                method: 'POST',
+                url: '/googleLogIn',
+                data: {tokenId: response?.tokenId}
+            }).then((response)=>{
+                console.log(response);
+            })
+          }
+        const responseErrorGoogle = (response) => {
+            console.log("Error in google login",response);
+          }
         return (
           <div>
             <Grid container component="main" sx={{ height: "100vh" }}>
@@ -71,23 +84,19 @@ class Login extends Component {
                   <Typography component="h1" variant="h5">
                     Sign in
                   </Typography>
-                  {/* {error && <div className="alert error-dailog">{error}</div>} */}
                   <Box
                     component="form"
-                    onSubmit={this.handleSubmitForm}
                     noValidate
                     sx={{ mt: 1 }}
                   >
-                    <Button
-                      type="submit"
-                      fullWidth
-                      variant="contained"
-                      sx={{ mt: 3, mb: 2 }}
-                    //   disabled={inProgress}
-                      id="sign-in"
-                    >
-                      Sign In
-                    </Button>
+                   <GoogleLogin
+                        clientId={SECRET.CLIENT_ID}
+                        buttonText="Login with Google"
+                        onSuccess={responseSuccessGoogle}
+                        onFailure={responseErrorGoogle}
+                        cookiePolicy={'single_host_origin'}
+                        // isSignedIn={true}
+                    />
                   </Box>
                 </Box>
               </Grid>
