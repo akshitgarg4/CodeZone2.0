@@ -1,41 +1,27 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-// import { logoutUser } from "../actions/auth";
-// import Avatar from '@mui/material/Avatar';
+import { logoutUser } from "../../actions/auth";
+import Avatar from "@mui/material/Avatar";
 import logo from "../../static/logo.png";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Button, Grid } from "@mui/material";
-import LoginIcon from '@mui/icons-material/Login';
+import LoginIcon from "@mui/icons-material/Login";
 import { Paper } from "@mui/material";
-import {CssBaseline} from '@mui/material';
-// import HowToRegIcon from "@mui/icons-material/HowToReg";
-// import LogoutIcon from "@mui/icons-material/Logout";
+import { CssBaseline } from "@mui/material";
+import LogoutIcon from "@mui/icons-material/Logout";
 class Nav extends React.Component {
-  state = {
-    create: false,
-    join: false,
-  };
   logout = () => {
-    localStorage.removeItem("token");
-    // this.props.dispatch(logoutUser());
-  };
-  toggleCreateButton = () => {
-    this.setState({
-      create: !this.state.create,
-    });
-  };
-  toggleJoinButton = () => {
-    this.setState({
-      join: !this.state.join,
-    });
+    console.log("clicked");
+    localStorage.removeItem("CodeZone2_Token");
+    this.props.dispatch(logoutUser());
   };
 
   render() {
-    // const { auth } = this.props;
+    const { auth } = this.props;
     return (
       <>
         <CssBaseline />
@@ -49,42 +35,39 @@ class Nav extends React.Component {
                   </Link>
                 </Typography>
 
-                {/* {!auth.isLoggedIn && ( */}
-                {true && (
+                {!auth.isLoggedIn && (
                   <Button>
-                    <Link to="/login" id="login-button">
+                    <Link to="/" id="login-button">
                       <LoginIcon color="action" fontSize="small" />
                     </Link>
                   </Button>
                 )}
-                {/* {auth.isLoggedIn && (
-                <Button onClick={this.logout}>
-                  <Link to="/" id="logout-button">
-                    <LogoutIcon color="action" fontSize="small" />
-                  </Link>
-                </Button>
-              )} */}
+                {auth.isLoggedIn && (
+                  <Button onClick={this.logout}>
+                    <Link to="/" id="logout-button">
+                      <LogoutIcon color="action" fontSize="small" />
+                    </Link>
+                  </Button>
+                )}
 
-                {/* {auth.isLoggedIn && (
-                <div>
-                  <Grid
-                    container
-                    direction="row"
-                    justifyContent="space-evenly"
-                    alignItems="center"
-                  >
-                    <Grid item m={0.25}>
-                      <Link to="/settings" id="profile-settings">
+                {auth.isLoggedIn && (
+                  <div>
+                    <Grid
+                      container
+                      direction="row"
+                      justifyContent="space-evenly"
+                      alignItems="center"
+                    >
+                      <Grid item m={0.25}>
                         <Avatar
-                          src={auth?.user?.avatar}
+                          src={auth?.user?.picture}
                           sx={{ width: 35, height: 35 }}
                           id="profile-page"
                         />
-                      </Link>
+                      </Grid>
                     </Grid>
-                  </Grid>
-                </div>
-              )} */}
+                  </div>
+                )}
               </Toolbar>
             </AppBar>
           </Box>
@@ -96,7 +79,7 @@ class Nav extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    // auth: state.auth,
+    auth: state.auth,
   };
 }
 
