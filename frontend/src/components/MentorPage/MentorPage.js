@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import Todo from "./Todo/Todo";
 
 const MentorPage = (props) => {
   console.log(props.auth.inProgress);
@@ -7,6 +8,7 @@ const MentorPage = (props) => {
     <div>
       Mentor Page
       <p>{props.auth.inProgress}</p>
+      <Todo/>
     </div>
   );
 }
