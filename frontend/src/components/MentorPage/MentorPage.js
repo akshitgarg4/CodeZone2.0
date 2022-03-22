@@ -1,8 +1,20 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { connect } from "react-redux";
 
-const MentorPage = () => {
-  return <h1>Welcome to GeeksforGeeks</h1>;
-};
+const MentorPage = (props) => {
+  console.log(props.auth.inProgress);
+  return (
+    <div>
+      Mentor Page
+      <p>{props.auth.inProgress}</p>
+    </div>
+  );
+}
 
-export default MentorPage;
+function mapStateToProps(state) {
+  return {
+    auth: state.auth,
+  };
+}
+
+export default connect(mapStateToProps)(MentorPage);
