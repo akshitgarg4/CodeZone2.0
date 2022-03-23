@@ -3,6 +3,10 @@ import { connect } from "react-redux";
 import { addTodo } from "../../../actions/actionCreator";
 import { bindActionCreators } from "redux";
 
+// mui
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+
 class CreateTodo extends Component {
   constructor(props) {
     super(props);
@@ -20,35 +24,31 @@ class CreateTodo extends Component {
 
   render() {
     return (
-      <div className="form-group row">
-        <div className="col-sm-10">
-          <input
+      <div>
+        <div>
+          <TextField
             onChange={this.onChangeTodoText}
             value={this.state.todotext}
             type="text"
-            className="form-control"
-            id="inputEmail3"
+            id="outlined-basic"
+            variant="filled"
             placeholder="add todo here"
           />
-          <button
-            type="button"
+          <Button
+            variant="contained"
             onClick={() => this.setState({ todotext: "" })}
-            style={{ marginTop: "25px", marginRight: "15px" }}
-            className="btn btn-danger"
           >
             Cancel
-          </button>
-          <button
-            type="button"
+          </Button>
+          <Button
+            variant="contained"
             onClick={() => {
               this.props.addTodo(this.state.todotext);
               this.setState({ todotext: "" });
             }}
-            style={{ marginTop: "25px" }}
-            className="btn btn-success"
           >
             Add Todo
-          </button>
+          </Button>
         </div>
       </div>
     );

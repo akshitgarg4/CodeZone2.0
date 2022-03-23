@@ -1,13 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import CreateTodo from './CreateTodo';
-import Table from './Table';
+import TodoTable from "./TodoTable";
 
 const Todo = (props) => {
   return (
     <div>
-        <CreateTodo />
-        <Table />
+      <CreateTodo />
+      <TodoTable />
     </div>
   );
 };
