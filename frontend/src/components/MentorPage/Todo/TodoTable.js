@@ -28,8 +28,8 @@ import Button from "@mui/material/Button";
 class TodoTable extends Component {
   render() {
     return (
-      <div className="col-lg-10 offset-lg-1 col-md-10 col-sm-12 col-xs-12">
-        <FormGroup>
+      <div>
+        <FormGroup row>
           <FormControlLabel
             control={<Checkbox defaultChecked />}
             label="All"
@@ -53,7 +53,7 @@ class TodoTable extends Component {
                 <TableHead>
                   <TableRow>
                     <TableCell>Todos</TableCell>
-                    <TableCell align="right">Action</TableCell>
+                    <TableCell>Action</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -74,7 +74,7 @@ class TodoTable extends Component {
                           {todo.completed === true ? "(completed)" : ""}
                         </td>
                       </TableCell>
-                      <TableCell align="right">
+                      <TableCell>
                         {" "}
                         <Button onClick={() => this.props.deleteTodo(todo.id)}>
                           Delete
@@ -90,7 +90,7 @@ class TodoTable extends Component {
             </TableContainer>
           </div>
         ) : (
-          <div className="alert alert-danger" role="alert">
+          <div>
             Todo List is empty or Filter results show no results
           </div>
         )}{" "}

@@ -1,3 +1,4 @@
+import { Grid } from "@mui/material";
 import React from "react";
 import { connect } from "react-redux";
 import Todo from "./Todo/Todo";
@@ -5,11 +6,14 @@ import Todo from "./Todo/Todo";
 const MentorPage = (props) => {
   console.log(props.auth.inProgress);
   return (
-    <div>
-      Mentor Page
-      <p>{props.auth.inProgress}</p>
-      <Todo/>
-    </div>
+    <Grid container>
+      <Grid item xs={4}>
+        Mentor Page
+      </Grid>
+      <Grid item xs={6}>
+        <Todo />
+      </Grid>
+    </Grid>
   );
 }
 
