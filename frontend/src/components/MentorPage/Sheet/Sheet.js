@@ -12,15 +12,16 @@ import TableRow from "@mui/material/TableRow";
 import { Box } from "@mui/system";
 
 const InputGridHeaders = ["Name", "Sid"];
-const InputGridLayout = { x: 2, y: 10 };
 
 class Sheet extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      grid: Array.from({ length: InputGridLayout.y }, () =>
-        new Array(InputGridLayout.x).fill({ value: "values" })
-      ),
+      grid: [
+        [{ value: "Shayan" }, { value: "18103033" }],
+        [{ value: "Gagan" }, { value: "18103032" }],
+        [{ value: "Akshit" }, { value: "18103042" }],
+      ],
     };
   }
 
@@ -45,11 +46,9 @@ class Sheet extends React.Component {
             <Table className={props.className + " my-awesome-extra-class"}>
               <TableHead>
                 <TableRow>
-                  <TableHead>
-                  {InputGridHeaders.map((col, index) => (
+                    {InputGridHeaders.map((col, index) => (
                       <TableCell key={index}>{col}</TableCell>
                     ))}
-                    </TableHead>
                 </TableRow>
               </TableHead>
               <TableBody>{props.children}</TableBody>
