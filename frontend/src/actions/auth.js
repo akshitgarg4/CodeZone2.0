@@ -4,6 +4,7 @@ import {
   LOG_OUT,
   CLEAR_AUTH_STATE,
 } from "./actionTypes";
+
 export function loginSuccess(user) {
   return {
     type: LOGIN_SUCCESS,
