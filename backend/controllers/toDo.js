@@ -44,5 +44,26 @@ module.exports.delete = async function(req, res){
 	}
 }
 module.exports.complete = async function(req, res){
-
+	let task = await toDo.findById(sanitizer.escape(req.params.task_id));
+	if(task){
+		if(task.mentor._id === req.user.id){
+			task.complete = !task.complete;
+			task = await task.save();
+			return res.status(200).json({
+				message: "Task deleted successfully!",
+				data: task,
+				success: true
+			})
+		} else{
+			return res.status(403).json({
+				message: "User did not create this task!",
+				success: false
+			})
+		}
+	} else{
+		return res.status(404).json({
+			message: "Task not found!",
+			success: false
+		})
+	}
 }
