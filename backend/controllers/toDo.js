@@ -67,3 +67,12 @@ module.exports.complete = async function(req, res){
 		})
 	}
 }
+
+module.exports.getAllTasks = async function(req, res){
+	let tasks = toDo.find({mentor: req.user.id})
+	return res.status(200).json({
+		message: "All Tasks",
+		success: true,
+		data: tasks
+	})
+}

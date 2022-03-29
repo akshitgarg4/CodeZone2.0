@@ -5,6 +5,7 @@ const toDo = require("../controllers/toDo")
 router.post('/add', toDo.add);
 router.delete('/delete/:task_id', toDo.delete);
 router.get('/complete/:task_id', toDo.complete);
+router.get('/', toDo.getAllTasks)
 
 
 module.exports = router;
