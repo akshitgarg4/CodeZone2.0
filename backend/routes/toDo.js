@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const toDo = require("../controllers/toDo")
+const auth = require("../config/authenticate")
 
-router.post('/add', toDo.add);
-router.delete('/delete/:task_id', toDo.delete);
-router.get('/complete/:task_id', toDo.complete);
-router.patch('/update/:task_id', toDo.update);
+router.post('/add', auth.authenticateToken, toDo.add);
+router.delete('/delete/:task_id', auth.authenticateToken, toDo.delete);
+router.get('/complete/:task_id', auth.authenticateToken, toDo.complete);
+router.patch('/update/:task_id', auth.authenticateToken, toDo.update);
 
 router.get('/', toDo.getAllTasks)
 
