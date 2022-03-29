@@ -22,7 +22,26 @@ module.exports.add = async function(req, res){
 	}
 }
 module.exports.delete = async function(req, res){
-
+	let task = await toDo.findById(sanitizer.escape(req.params.task_id));
+	if(task){
+		if(task.mentor._id === req.user.id){
+			await toDo.findByIdAndDelete(sanitizer.escape(req.params.task_id)).exec();
+			return res.status(200).json({
+				message: "Task deleted successfully!",
+				success: true
+			})
+		} else{
+			return res.status(403).json({
+				message: "User did not create this task!",
+				success: false
+			})
+		}
+	} else{
+		return res.status(404).json({
+			message: "Task not found!",
+			success: false
+		})
+	}
 }
 module.exports.complete = async function(req, res){
 
