@@ -4,7 +4,7 @@ const sanitizer = require('sanitizer');
 module.exports.add = async function(req, res){
 	let newTask = await toDo.create({
 		mentor: req.user.id,
-		task: req.body.task,
+		task: req.body.text,
 		
 	})
 	if(newTask){
