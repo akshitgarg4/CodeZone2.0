@@ -1,4 +1,11 @@
-import {ADD_TODO_FAIL, ADD_TODO_SUCCESS, REMOVE_TODO, SET_VISIBILITY_FILTER, TOGGLE_TODO,} from "./actionTypes";
+import {
+	ADD_TODO_FAIL,
+	ADD_TODO_SUCCESS,
+	REMOVE_TODO_FAIL,
+	REMOVE_TODO_SUCCESS,
+	SET_VISIBILITY_FILTER,
+	TOGGLE_TODO,
+} from "./actionTypes";
 
 function getFormBody(params){
 	let FormBody = [];
@@ -10,7 +17,7 @@ function getFormBody(params){
 	return FormBody.join("&");
 }
 
-function addTodoComplete(data, message, type){
+function toDoRequestComplete(data, message, type){
 	return {
 		message: message,
 		type: type,
@@ -33,11 +40,11 @@ export function addTodo(text){
 			.then((response) => response.json())
 			.then((data) => {
 				if(data.success){
-					dispatch(addTodoComplete(data.data, data.message, ADD_TODO_SUCCESS));
+					dispatch(toDoRequestComplete(data.data, data.message, ADD_TODO_SUCCESS));
 					
 					
 				} else{
-					dispatch(addTodoComplete(data.data, data.message, ADD_TODO_FAIL));
+					dispatch(toDoRequestComplete(data.data, data.message, ADD_TODO_FAIL));
 					
 				}
 			})
@@ -45,10 +52,31 @@ export function addTodo(text){
 	
 }
 
-export const deleteTodo = (id) => ({
-	type: REMOVE_TODO,
-	id: id,
-});
+export function deleteTodo(id){
+	
+	return (dispatch) => {
+		const url = `/toDo/delete/${id}`;
+		fetch(url, {
+			method: "DELETE",
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem("CodeZone2_Token")}`,
+			},
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				if(data.success){
+					dispatch(toDoRequestComplete(data.data, data.message, REMOVE_TODO_SUCCESS));
+					
+					
+				} else{
+					dispatch(toDoRequestComplete(data.data, data.message, REMOVE_TODO_FAIL));
+					
+				}
+			})
+	}
+	
+}
+
 
 export const toggleTodo = (id) => ({
 	type: TOGGLE_TODO,
@@ -56,6 +84,6 @@ export const toggleTodo = (id) => ({
 });
 
 export const setVisibilityFilter = (filter) => ({
-  type: SET_VISIBILITY_FILTER,
-  filter,
+	type: SET_VISIBILITY_FILTER,
+	filter,
 });

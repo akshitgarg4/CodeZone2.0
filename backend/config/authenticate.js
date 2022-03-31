@@ -9,7 +9,7 @@ module.exports.authenticateToken = function ( req , res , next ) {
         });
     }
     jwt.verify(token, "CODEZONE2", (err, user) => {
-        console.log(token, err, user, authHeader);
+    
         if(err){
             return res.json(422, {
                 message: "Server Error while retrieving token",
