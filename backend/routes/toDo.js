@@ -8,7 +8,7 @@ router.delete('/delete/:task_id', auth.authenticateToken, toDo.delete);
 router.patch('/complete/:task_id', auth.authenticateToken, toDo.complete);
 router.patch('/update/:task_id', auth.authenticateToken, toDo.update);
 
-router.get('/', toDo.getAllTasks)
+router.get('/', auth.authenticateToken, toDo.getAllTasks)
 
 
 module.exports = router;

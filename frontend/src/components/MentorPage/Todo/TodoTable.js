@@ -1,18 +1,10 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import {
-  deleteTodo,
-  toggleTodo,
-  setVisibilityFilter,
-} from "../../../actions/actionCreator";
-import {
-  SHOW_ALL,
-  SHOW_COMPLETED,
-  SHOW_ACTIVE,
-} from "../../../actions/actionTypes";
-import { bindActionCreators } from "redux";
+import React, {Component} from "react";
+import {connect} from "react-redux";
+import {deleteTodo, fetchAllTodo, setVisibilityFilter, toggleTodo,} from "../../../actions/actionCreator";
+import {SHOW_ACTIVE, SHOW_ALL, SHOW_COMPLETED,} from "../../../actions/actionTypes";
+import {bindActionCreators} from "redux";
 
-//Mui 
+//Mui
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
@@ -25,17 +17,21 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 
-class TodoTable extends Component {
-  render() {
+class TodoTable extends Component{
+  componentWillMount(){
+    this.props.fetchAllTodo();
+  }
+  
+  render(){
     return (
-      <div>
-        <FormGroup row>
-          <FormControlLabel
-            control={<Checkbox defaultChecked />}
-            label="All"
-            onClick={() => this.props.setVisibilityFilter(SHOW_ALL)}
-          />
-          <FormControlLabel
+        <div>
+          <FormGroup row>
+            <FormControlLabel
+                control={<Checkbox defaultChecked/>}
+                label="All"
+                onClick={() => this.props.setVisibilityFilter(SHOW_ALL)}
+            />
+            <FormControlLabel
             control={<Checkbox deafultUnchecked />}
             label="Completed"
             onClick={() => this.props.setVisibilityFilter(SHOW_COMPLETED)}
@@ -121,11 +117,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
-    {
-      deleteTodo,
-      toggleTodo,
-      setVisibilityFilter,
-    },
+      {
+        deleteTodo,
+        toggleTodo,
+        setVisibilityFilter,
+        fetchAllTodo,
+      },
     dispatch
   );
 };

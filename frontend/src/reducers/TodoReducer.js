@@ -1,4 +1,4 @@
-import {ADD_TODO_SUCCESS, REMOVE_TODO_SUCCESS, TOGGLE_TODO_SUCCESS} from "../actions/actionTypes";
+import {ADD_TODO_SUCCESS, GET_TODO_SUCCESS, REMOVE_TODO_SUCCESS, TOGGLE_TODO_SUCCESS} from "../actions/actionTypes";
 
 const INITIAL_DATA = [];
 
@@ -25,6 +25,17 @@ const TodoReducer = (state = INITIAL_DATA, action) => {
       return state.map((todo) =>
           todo.id === toggledTaskID ? {...todo, completed: !todo.completed} : todo
       );
+    case GET_TODO_SUCCESS:
+      console.log(action)
+      let newState = [...state];
+      action.data.map((todo) =>
+          newState.push({
+            id: todo._id,
+            text: todo.task,
+            completed: todo.complete,
+          })
+      );
+      return newState;
     default:
       return state;
   }

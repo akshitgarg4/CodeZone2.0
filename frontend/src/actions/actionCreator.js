@@ -1,6 +1,8 @@
 import {
 	ADD_TODO_FAIL,
 	ADD_TODO_SUCCESS,
+	GET_TODO_FAIL,
+	GET_TODO_SUCCESS,
 	REMOVE_TODO_FAIL,
 	REMOVE_TODO_SUCCESS,
 	SET_VISIBILITY_FILTER,
@@ -95,6 +97,29 @@ export function toggleTodo(id){
 					dispatch(toDoRequestComplete(data.data, data.message, TOGGLE_TODO_SUCCESS));
 				} else{
 					dispatch(toDoRequestComplete(data.data, data.message, TOGGLE_TODO_FAIL));
+					
+				}
+			})
+	}
+	
+}
+
+export function fetchAllTodo(){
+	console.log("Fetch");
+	return (dispatch) => {
+		const url = `/toDo/`;
+		fetch(url, {
+			method: "GET",
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem("CodeZone2_Token")}`,
+			},
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				if(data.success){
+					dispatch(toDoRequestComplete(data.data, data.message, GET_TODO_SUCCESS));
+				} else{
+					dispatch(toDoRequestComplete(data.data, data.message, GET_TODO_FAIL));
 					
 				}
 			})

@@ -12,6 +12,9 @@ export const REMOVE_TODO_FAIL = "REMOVE_TODO_FAIL";
 export const TOGGLE_TODO_SUCCESS = "TOGGLE_TODO_SUCCESS";
 export const TOGGLE_TODO_FAIL = "TOGGLE_TODO_FAIL";
 
+export const GET_TODO_SUCCESS = "GET_TODO_SUCCESS";
+export const GET_TODO_FAIL = "GET_TODO_FAIL";
+
 export const SHOW_ALL = "SHOW_ALL";
 export const SHOW_COMPLETED = "SHOW_COMPLETED";
 export const SHOW_ACTIVE = "SHOW_ACTIVE";
