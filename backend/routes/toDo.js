@@ -5,7 +5,7 @@ const auth = require("../config/authenticate")
 
 router.post('/add', auth.authenticateToken, toDo.add);
 router.delete('/delete/:task_id', auth.authenticateToken, toDo.delete);
-router.get('/complete/:task_id', auth.authenticateToken, toDo.complete);
+router.patch('/complete/:task_id', auth.authenticateToken, toDo.complete);
 router.patch('/update/:task_id', auth.authenticateToken, toDo.update);
 
 router.get('/', toDo.getAllTasks)

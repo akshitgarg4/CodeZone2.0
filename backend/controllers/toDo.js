@@ -42,6 +42,7 @@ module.exports.delete = async function(req, res){
 	} else{
 		return res.status(404).json({
 			message: "Task not found!",
+			data: null,
 			success: false
 		})
 	}
@@ -49,23 +50,25 @@ module.exports.delete = async function(req, res){
 module.exports.complete = async function(req, res){
 	let task = await toDo.findById(sanitizer.escape(req.params.task_id));
 	if(task){
-		if(task.mentor._id === req.user.id){
+		if(task.mentor === req.user.id){
 			task.complete = !task.complete;
 			task = await task.save();
 			return res.status(200).json({
-				message: "Task deleted successfully!",
-				data: task,
+				message: task.complete ? "Task marked complete successfully!" : "Task unmarked complete successfully",
+				data: sanitizer.escape(req.params.task_id),
 				success: true
 			})
 		} else{
 			return res.status(403).json({
 				message: "User did not create this task!",
+				data: task,
 				success: false
 			})
 		}
 	} else{
 		return res.status(404).json({
 			message: "Task not found!",
+			data: null,
 			success: false
 		})
 	}
@@ -89,7 +92,7 @@ module.exports.update = async function(req, res){
 	}
 	let task = await toDo.findById(sanitizer.escape(req.params.task_id));
 	if(task){
-		if(task.mentor._id === req.user.id){
+		if(task.mentor === req.user.id){
 			task.task = req.body.task;
 			task = await task.save();
 			return res.status(200).json({

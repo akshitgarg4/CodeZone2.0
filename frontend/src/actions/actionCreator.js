@@ -4,7 +4,8 @@ import {
 	REMOVE_TODO_FAIL,
 	REMOVE_TODO_SUCCESS,
 	SET_VISIBILITY_FILTER,
-	TOGGLE_TODO,
+	TOGGLE_TODO_FAIL,
+	TOGGLE_TODO_SUCCESS,
 } from "./actionTypes";
 
 function getFormBody(params){
@@ -78,10 +79,28 @@ export function deleteTodo(id){
 }
 
 
-export const toggleTodo = (id) => ({
-	type: TOGGLE_TODO,
-	id: id,
-});
+export function toggleTodo(id){
+	
+	return (dispatch) => {
+		const url = `/toDo/complete/${id}`;
+		fetch(url, {
+			method: "PATCH",
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem("CodeZone2_Token")}`,
+			},
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				if(data.success){
+					dispatch(toDoRequestComplete(data.data, data.message, TOGGLE_TODO_SUCCESS));
+				} else{
+					dispatch(toDoRequestComplete(data.data, data.message, TOGGLE_TODO_FAIL));
+					
+				}
+			})
+	}
+	
+}
 
 export const setVisibilityFilter = (filter) => ({
 	type: SET_VISIBILITY_FILTER,
