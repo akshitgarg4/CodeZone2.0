@@ -10,6 +10,14 @@ function getFormBody(params){
 	return FormBody.join("&");
 }
 
+function addTodoComplete(data, message, type){
+	return {
+		message: message,
+		type: type,
+		data: data,
+	};
+}
+
 export function addTodo(text){
 	
 	return (dispatch) => {
@@ -24,23 +32,12 @@ export function addTodo(text){
 		})
 			.then((response) => response.json())
 			.then((data) => {
-				console.log(data);
 				if(data.success){
-					dispatch(() => {
-						return {
-							type: ADD_TODO_SUCCESS,
-							data: data.data,
-							message: data.message,
-						}
-					});
+					dispatch(addTodoComplete(data.data, data.message, ADD_TODO_SUCCESS));
+					
 					
 				} else{
-					dispatch(() => {
-						return {
-							type: ADD_TODO_FAIL,
-							message: data.message,
-						}
-					});
+					dispatch(addTodoComplete(data.data, data.message, ADD_TODO_FAIL));
 					
 				}
 			})

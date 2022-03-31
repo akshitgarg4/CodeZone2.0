@@ -4,11 +4,12 @@ const INITIAL_DATA = [];
 
 const TodoReducer = (state = INITIAL_DATA, action) => {
   switch(action.type){
+  
     case ADD_TODO_SUCCESS:
       return [
         ...state,
         {
-          id: action.data.id,
+          id: action.data._id,
           text: action.data.task,
           completed: action.data.complete,
           message: action.message,
