@@ -4,6 +4,12 @@ import ExistingFiles from './ExistingFiles';
 
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
 
 export default function Classroom() {
@@ -69,11 +75,65 @@ export default function Classroom() {
               break;  
             }}}
   }
-  return <div style={{width:'100vw',height:'100vh', padding:'50px'}}>
-    Upload New Excell File!!<br></br>
-    <input type="file" onChange={(e) => handleFile(e)} /><br></br>
-    <input type='text' onChange={(e) => handleInput(e)} placeholder="Brief Description" /><br></br>
-    <input type="Submit" onClick={handleSubmit} />
+  return (
+  <div style={{width:'100vw',height:'100vh'}}>
+    <Grid
+                item
+                xs={12}
+                sm={8}
+                md={5}
+                component={Paper}
+                elevation={4}
+                square
+              >
+                <Box
+                  sx={{
+                    marginTop: 8,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    height: "auto",
+                    m: 2,
+                  }}
+                >
+                  <Typography component="h1" variant="h5">
+                  Upload New Excell File!!
+                  </Typography>
+                  <Box
+                    component="form"
+                    onSubmit={handleSubmit}
+                    noValidate
+                    sx={{ mt: 1 }}
+                  >
+    <TextField
+                            margin="normal"
+                            fullWidth
+                            name="file"
+                            type="file"
+                            id="file"
+                            onChange = {(e) => handleFile(e)}
+                        />
+                        <TextField
+                            margin="normal"
+                            fullWidth
+                            name="desc"
+                            label="Description"
+                            type="text"
+                            id="desc"
+                            autoComplete="desc"
+                            onChange={(e)=>{handleInput(e.target.value)}}
+                        />
+
+    <Button
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                      sx={{ mt: 3, mb: 2 }}
+                      id="upload"
+                    >
+                      Upload
+                    </Button>
+                    </Box>
     {error && <Snackbar open={true} autoHideDuration={2000}>
                         <Alert severity="error" sx={{ width: '100%' }}>
                         {error}
@@ -84,7 +144,8 @@ export default function Classroom() {
                         {success}
                         </Alert>
                     </Snackbar>}
-
+</Box>
     <ExistingFiles data={data} />
-  </div>;
+  </Grid>
+  </div>);
 }
