@@ -1,15 +1,43 @@
 import React, {useState} from "react";
 import {read,utils} from 'xlsx';
+import ExistingFiles from './ExistingFiles';
 
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
+
 
 export default function Classroom() {
   const [fileName,setFileName] = useState(null);
   const [error,setError] = useState('');
   const [success,setSuccess] = useState('');
   const [data,setData] = useState([]);
+  const [desc,setDesc] = useState('');
 
+  const handleInput = (e) => {
+    setDesc(e.target.value);
+  }
+  const handleSubmit = () =>{
+    if(fileName && data){
+      //send fileName, data and desc
+      // fetch('/api/new_upload', {
+        // method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/x-www-form-urlencoded",
+    // Authorization: `Bearer ${localStorage.getItem("CodeZone2.0")}`,
+    //     }
+    //   })
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //       console.log(data);
+    //       if (data?.success) {setFileName(null);
+  // setDesc('');
+    //       }
+    //     });
+
+
+    }
+
+  }
   const handleFile = async (e) =>{
     console.log(e.target.files[0])
     if(e.target.files[0] && e.target.files[0].name){
@@ -40,12 +68,12 @@ export default function Classroom() {
               },6000)
               break;  
             }}}
-
-    
   }
   return <div style={{width:'100vw',height:'100vh', padding:'50px'}}>
-    Welcome to Classroom<br></br>
-    <input type="file" onChange={(e) => handleFile(e)} />
+    Upload New Excell File!!<br></br>
+    <input type="file" onChange={(e) => handleFile(e)} /><br></br>
+    <input type='text' onChange={(e) => handleInput(e)} placeholder="Brief Description" /><br></br>
+    <input type="Submit" onClick={handleSubmit} />
     {error && <Snackbar open={true} autoHideDuration={2000}>
                         <Alert severity="error" sx={{ width: '100%' }}>
                         {error}
@@ -56,5 +84,7 @@ export default function Classroom() {
                         {success}
                         </Alert>
                     </Snackbar>}
+
+    <ExistingFiles data={data} />
   </div>;
 }
