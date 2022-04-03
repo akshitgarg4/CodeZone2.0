@@ -4,6 +4,7 @@ import Page404 from "./Page404/Page404";
 import Nav from "./Navbar/Nav";
 import Login from "./Login/Login";
 import Classroom from "./Classroom/Classroom";
+import Mentor from "./MentorPage/MentorPage";
 
 import { Paper } from "@mui/material";
 // @ts-ignore
@@ -34,6 +35,9 @@ class App extends React.Component {
             {!auth.isLoggedIn && <Route exact path="/" element={<Login />} />}
             {auth.isLoggedIn && (
               <Route exact path="/" element={<Classroom />} />
+            )}
+            {auth.isLoggedIn && (
+              <Route path="/mentor" element={<Mentor />} />
             )}
             <Route component={Page404} />
           </Routes>
