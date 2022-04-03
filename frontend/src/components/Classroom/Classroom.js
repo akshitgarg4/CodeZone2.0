@@ -18,7 +18,7 @@ export default function Classroom() {
   }
   const handleSubmit = () =>{
     if(fileName && data){
-      //send fileName, data and desc
+      //send fileName, data(array of objects) and description
       // fetch('/api/new_upload', {
         // method: "POST",
     //     headers: {
