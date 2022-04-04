@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {read,utils} from 'xlsx';
+import {read, utils} from 'xlsx';
 import ExistingFiles from './ExistingFiles';
 
 import Alert from '@mui/material/Alert';
@@ -24,23 +24,31 @@ export default function Classroom() {
   }
   const handleSubmit = () =>{
     if(fileName && data){
-      //send fileName, data(array of objects) and description
-      // fetch('/api/new_upload', {
-        // method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/x-www-form-urlencoded",
-    // Authorization: `Bearer ${localStorage.getItem("CodeZone2.0")}`,
-    //     }
-    //   })
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //       console.log(data);
-    //       if (data?.success) {setFileName(null);
-  // setDesc('');
-    //       }
-    //     });
-
-
+        console.log("EE");
+        console.log(fileName, data);
+        //send fileName, data(array of objects) and description
+        fetch('/api/new_upload', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("CodeZone2.0")}`,
+                body: JSON.stringify({
+                    fileName: fileName,
+                    fileDescription: desc,
+                    data: data,
+                })
+            }
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                if(data?.success){
+                    setFileName(null);
+                    setDesc('');
+                }
+            });
+    
+    
     }
 
   }

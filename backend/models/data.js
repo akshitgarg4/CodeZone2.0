@@ -2,9 +2,10 @@ const mongoose = require("mongoose");
 
 const dataSchema = new mongoose.Schema(
 	{
-		task: {type: String, required: true},
-		complete: {type: Boolean, required: true, default: false},
-		mentor: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
+		description: {type: String, required: true, default: ''},
+		title: {type: String, required: true},
+		supervisor: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+		data: []
 	},
 	{timestamps: true}
 );
