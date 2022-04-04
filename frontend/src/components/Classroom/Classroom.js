@@ -27,7 +27,7 @@ export default function Classroom() {
         console.log("EE");
         console.log(fileName, data);
         //send fileName, data(array of objects) and description
-        fetch('/api/new_upload', {
+        fetch('/data/new_upload', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -41,7 +41,7 @@ export default function Classroom() {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
+                console.log(data, "EEWW");
                 if(data?.success){
                     setFileName(null);
                     setDesc('');
