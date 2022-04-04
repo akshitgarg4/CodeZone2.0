@@ -10,7 +10,7 @@ module.exports.save = async function(req, res){
 		supervisor: req.user._id,
 	});
 	newData = await newData.save();
-	console.log(newData);
+	console.log("gfgb", newData);
 	if(newData){
 		return res.status(201).json({
 			data: newData,
@@ -27,4 +27,23 @@ module.exports.save = async function(req, res){
 	
 }
 module.exports.fetch = async function(req, res){
+	let previousData = [];
+	let allData = await data.find({supervisor: req.user._id});
+	for(let index = 0; index < allData.length; index++){
+		let currentData = {
+			number: allData[index]._id,
+			fileName: allData[index].title,
+			description: allData[index].description,
+			dateUploaded: allData[index].updatedAt,
+			timeUploaded: allData[index].updatedAt,
+			data: allData[index].data,
+		}
+		previousData.push(currentData);
+	}
+	return res.status(200).json({
+		data: previousData,
+		success: true,
+		message: "Data fetch Successful",
+	})
+	
 }

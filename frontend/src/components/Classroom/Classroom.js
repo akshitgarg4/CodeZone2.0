@@ -31,13 +31,14 @@ export default function Classroom() {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("CodeZone2.0")}`,
-                body: JSON.stringify({
-                    fileName: fileName,
-                    fileDescription: desc,
-                    data: data,
-                })
-            }
+                Authorization: `Bearer ${localStorage.getItem("CodeZone2_Token")}`,
+            },
+            body: JSON.stringify({
+                fileName: fileName,
+                fileDescription: desc,
+                data: data,
+            }),
+    
         })
             .then((response) => response.json())
             .then((data) => {
