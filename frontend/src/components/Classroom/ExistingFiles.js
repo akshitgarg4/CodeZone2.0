@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -8,34 +8,45 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 
-export default function ExistingFiles(props) {
-  const [existingData,setExistingData] = useState([
-      {'number' : '1', 'fileName' : 'ABC', 'dateUploaded': 'Date', 'timeUploaded': 'Time', 'description' :'Desc', 'data': []}
-  ]);
-//   useEffect(() => {
-    // fetch('/api/past_uploads', {
-    //     headers: {
-    //       "Content-Type": "application/x-www-form-urlencoded",
-    //     }
-    //   })
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //       console.log(data);
-    //       if (data?.success) {
-    //         setExistingData(data?.data);
-    //       }
-    //     });
-//   }, [props.data])
-  
-  return (
-    <div style={{ marginTop: 8,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        height: "auto",
-        m: 2,}}>
-        <Typography component="h1" variant="h5">
-        Past Uploaded Files!!
+export default function ExistingFiles(props){
+    const [existingData, setExistingData] = useState([
+        {
+            'number': '1',
+            'fileName': 'ABC',
+            'dateUploaded': 'Date',
+            'timeUploaded': 'Time',
+            'description': 'Desc',
+            'data': []
+        }
+    ]);
+    useEffect(() => {
+        fetch('/data/past_uploads', {
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                Authorization: `Bearer ${localStorage.getItem("CodeZone2_Token")}`,
+                
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                if(data?.success){
+                    setExistingData(data?.data);
+                }
+            });
+    }, [props.data])
+    
+    return (
+        <div style={{
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            height: "auto",
+            m: 2,
+        }}>
+            <Typography component="h1" variant="h5">
+                Past Uploaded Files!!
         </Typography>
         <TableContainer component={Paper} style={{paddingLeft:'100px',paddingTop:'50px'}}>
       <Table sx={{ maxWidth: 950 }} aria-label="simple table">
