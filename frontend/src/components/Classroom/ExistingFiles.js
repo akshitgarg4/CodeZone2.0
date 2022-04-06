@@ -56,13 +56,13 @@ export default function ExistingFiles(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {existingData.map((row) => (
+            {existingData.map((row,count) => (
               <TableRow
                 key={row.name}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {row.number}
+                  {count+1}
                 </TableCell>
                 <TableCell align="right">{row.fileName}</TableCell>
                 <TableCell align="right">{row.description}</TableCell>
