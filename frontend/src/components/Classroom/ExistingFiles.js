@@ -7,8 +7,11 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
+import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 export default function ExistingFiles(props) {
+  let navigate = useNavigate();
   const [existingData, setExistingData] = useState([]);
   useEffect(() => {
     fetch("/data/past_uploads", {
@@ -68,7 +71,15 @@ export default function ExistingFiles(props) {
                 <TableCell align="right">{row.description}</TableCell>
                 <TableCell align="right">{row.dateUploaded.slice(0,10)}</TableCell>
                 <TableCell align="right">{row.timeUploaded.slice(11,19)}</TableCell>
-                <TableCell align="right">View</TableCell>
+                <TableCell align="right">
+                {row.number && <button onClick={()=> navigate(
+                  `/View-Data/${row.number}`,
+                  {state:{data:row.data}} 
+                )}
+                >
+                          View Data  
+                        </button>
+                        }</TableCell>
               </TableRow>
             ))}
           </TableBody>
