@@ -5,7 +5,7 @@ import Nav from "./Navbar/Nav";
 import Login from "./Login/Login";
 import Classroom from "./Classroom/Classroom";
 import Mentor from "./MentorPage/MentorPage";
-import ViewData from "./ViewData";
+import ViewData from "./Classroom/ViewData";
 
 import { Paper } from "@mui/material";
 // @ts-ignore
@@ -27,7 +27,6 @@ class App extends React.Component {
 
   render() {
     const { auth } = this.props;
-    console.log(auth);
     return (
       <Paper>
         <Router>
@@ -37,9 +36,7 @@ class App extends React.Component {
             {auth.isLoggedIn && (
               <Route exact path="/" element={<Classroom />} />
             )}
-            {auth.isLoggedIn && (
-              <Route path="/mentor" element={<Mentor />} />
-            )}
+            {auth.isLoggedIn && <Route path="/mentor" element={<Mentor />} />}
             {auth.isLoggedIn && (
               <Route path="/View-Data/:dataId" element={<ViewData />} />
             )}

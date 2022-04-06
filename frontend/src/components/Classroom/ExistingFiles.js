@@ -18,6 +18,7 @@ export default function ExistingFiles(props) {
     console.log("DOC DELETED",doc_id);
     //post doc_id to be deleted
     //response send all the documents of that user if success
+    //send the docs in recent order doc that was uploaded recently needs to be on index 0
 
     // fetch("/data/delete_record", {
     //   method: "POST",
@@ -105,7 +106,8 @@ export default function ExistingFiles(props) {
                     <button
                       onClick={() =>
                         navigate(`/View-Data/${row.number}`, {
-                          state: { data: row.data },
+                          state: { data: row.data,
+                          description: row.description },
                         })
                       }
                     >
