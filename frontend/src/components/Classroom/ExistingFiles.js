@@ -66,8 +66,8 @@ export default function ExistingFiles(props) {
                 </TableCell>
                 <TableCell align="right">{row.fileName}</TableCell>
                 <TableCell align="right">{row.description}</TableCell>
-                <TableCell align="right">{row.dateUploaded}</TableCell>
-                <TableCell align="right">{row.timeUploaded}</TableCell>
+                <TableCell align="right">{row.dateUploaded.slice(0,10)}</TableCell>
+                <TableCell align="right">{row.timeUploaded.slice(11,19)}</TableCell>
                 <TableCell align="right">View</TableCell>
               </TableRow>
             ))}
