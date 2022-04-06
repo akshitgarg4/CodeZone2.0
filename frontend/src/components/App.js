@@ -5,7 +5,7 @@ import Nav from "./Navbar/Nav";
 import Login from "./Login/Login";
 import Classroom from "./Classroom/Classroom";
 import Mentor from "./MentorPage/MentorPage";
-import ViewData from "./ViewData";
+import ViewData from "./Classroom/ViewData";
 
 import { Paper } from "@mui/material";
 // @ts-ignore
