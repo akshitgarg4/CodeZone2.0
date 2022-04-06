@@ -8,11 +8,35 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
-import { Link } from 'react-router-dom';
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
 
 export default function ExistingFiles(props) {
   let navigate = useNavigate();
   const [existingData, setExistingData] = useState([]);
+  const handleDelete = (doc_id) => {
+    console.log("DOC DELETED",doc_id);
+    //post doc_id to be deleted
+    //response send all the documents of that user if success
+
+    // fetch("/data/delete_record", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Authorization: `Bearer ${localStorage.getItem("CodeZone2_Token")}`,
+    //   },
+    //   body: JSON.stringify({
+    //     doc_id: doc_id,
+    //   }),
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //     if (data?.success) {
+    //       setExistingData(data?.data);
+    //     }
+    //   });
+  };
   useEffect(() => {
     fetch("/data/past_uploads", {
       headers: {
@@ -56,30 +80,46 @@ export default function ExistingFiles(props) {
               <TableCell align="right">Date Uploaded</TableCell>
               <TableCell align="right">Time Uploaded</TableCell>
               <TableCell align="right">View Data</TableCell>
+              <TableCell align="right">Delete</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {existingData.map((row,count) => (
+            {existingData.map((row, count) => (
               <TableRow
                 key={row.name}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {count+1}
+                  {count + 1}
                 </TableCell>
                 <TableCell align="right">{row.fileName}</TableCell>
                 <TableCell align="right">{row.description}</TableCell>
-                <TableCell align="right">{row.dateUploaded.slice(0,10)}</TableCell>
-                <TableCell align="right">{row.timeUploaded.slice(11,19)}</TableCell>
                 <TableCell align="right">
-                {row.number && <button onClick={()=> navigate(
-                  `/View-Data/${row.number}`,
-                  {state:{data:row.data}} 
-                )}
-                >
-                          View Data  
-                        </button>
-                        }</TableCell>
+                  {row.dateUploaded.slice(0, 10)}
+                </TableCell>
+                <TableCell align="right">
+                  {row.timeUploaded.slice(11, 19)}
+                </TableCell>
+                <TableCell align="right">
+                  {row.number && (
+                    <button
+                      onClick={() =>
+                        navigate(`/View-Data/${row.number}`, {
+                          state: { data: row.data },
+                        })
+                      }
+                    >
+                      View Data
+                    </button>
+                  )}
+                </TableCell>
+                <TableCell align="right">
+                  {row.number && (
+                    <IconButton>
+                    <DeleteIcon onClick={() => handleDelete(row.number)} />
+                  </IconButton>
+                  )}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
