@@ -10,6 +10,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
+import IconButton from '@mui/material/IconButton';
+import SendIcon from '@mui/icons-material/Send';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -31,6 +33,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
+const handleSend = () =>{
+  console.log("send called");
+  //on click of this send email with mentor page to all the mentors present on that excell sheet 
+}
 export default function ViewData(props) {
     const location = useLocation();
     const {data,description} = location?.state;
@@ -89,52 +95,9 @@ export default function ViewData(props) {
         </TableBody>
       </Table>
     </TableContainer>
-      {/* <TableContainer
-        component={Paper}
-        style={{ paddingLeft: "100px", paddingTop: "50px" }}
-      >
-        <Table sx={{ maxWidth: 950 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>S. No.</TableCell>
-              <TableCell align="right">SID A</TableCell>
-              <TableCell align="right">Student A</TableCell>
-              <TableCell align="right">SID B</TableCell>
-              <TableCell align="right">Student B</TableCell>
-              <TableCell align="right">SID C</TableCell>
-              <TableCell align="right">Student C</TableCell>
-              <TableCell align="right">SID D</TableCell>
-              <TableCell align="right">Student D</TableCell>
-              <TableCell align="right">SID E</TableCell>
-              <TableCell align="right">Student E</TableCell>
-              <TableCell align="right">Mentor</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.map((row, count) => (
-              <TableRow
-                key={count}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {count + 1}
-                </TableCell>
-                <TableCell align="right">{row['SID A']}</TableCell>
-                <TableCell align="right">{row['Student A']}</TableCell>
-                <TableCell align="right">{row['SID B']}</TableCell>
-                <TableCell align="right">{row['Student B']}</TableCell>
-                <TableCell align="right">{row['SID C']}</TableCell>
-                <TableCell align="right">{row['Student C']}</TableCell>
-                <TableCell align="right">{row['SID D']}</TableCell>
-                <TableCell align="right">{row['Student D']}</TableCell>
-                <TableCell align="right">{row['SID E']}</TableCell>
-                <TableCell align="right">{row['Student E']}</TableCell>
-                <TableCell align="right">{row['Faculty Mentor']}</TableCell> 
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer> */}
+    <IconButton color={'primary'}>
+      <SendIcon onClick={handleSend} />&nbsp; Share Link with Mentors
+    </IconButton>
     </div>
   );
 }
