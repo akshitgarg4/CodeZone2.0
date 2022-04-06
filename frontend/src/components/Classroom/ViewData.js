@@ -33,8 +33,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function ViewData(props) {
     const location = useLocation();
-    const {data} = location?.state;
-    console.log(data);
+    const {data,description} = location?.state;
     
   return (
     <div
@@ -48,7 +47,7 @@ export default function ViewData(props) {
       }}
     >
       <Typography component="h1" variant="h5">
-        Description
+        {description}
       </Typography>
       <TableContainer component={Paper} style={{margin:4}}>
       <Table sx={{ maxWidth: 1200, margin:4}} aria-label="customized table">

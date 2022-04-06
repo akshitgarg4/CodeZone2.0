@@ -106,7 +106,8 @@ export default function ExistingFiles(props) {
                     <button
                       onClick={() =>
                         navigate(`/View-Data/${row.number}`, {
-                          state: { data: row.data },
+                          state: { data: row.data,
+                          description: row.description },
                         })
                       }
                     >
