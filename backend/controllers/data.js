@@ -1,4 +1,5 @@
 const data = require("../models/data");
+
 const sanitizer = require("sanitizer");
 
 module.exports.save = async function(req, res){
@@ -54,7 +55,9 @@ module.exports.delete = async function(req, res){
       message: "Record not found",
     });
   }
-  if(record.supervisor !== req.user._id){
+  
+  
+  if(record.supervisor.toString() !== req.user._id){
     return res.status(403).json({
       data: null,
       success: false,

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -7,7 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 
@@ -15,28 +15,36 @@ export default function ExistingFiles(props) {
   let navigate = useNavigate();
   const [existingData, setExistingData] = useState([]);
   const handleDelete = (doc_id) => {
-    console.log("DOC DELETED",doc_id);
-    //post doc_id to be deleted
-    //response send all the documents of that user if success
-    //send the docs in recent order doc that was uploaded recently needs to be on index 0
-
-    // fetch("/data/delete_record", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Authorization: `Bearer ${localStorage.getItem("CodeZone2_Token")}`,
-    //   },
-    //   body: JSON.stringify({
-    //     doc_id: doc_id,
-    //   }),
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //     if (data?.success) {
-    //       setExistingData(data?.data);
-    //     }
-    //   });
+      console.log("DOC DELETED", doc_id);
+      //post doc_id to be deleted
+      //response send all the documents of that user if success
+      //send the docs in recent order doc that was uploaded recently needs to be on index 0
+    
+      fetch(`/data/delete_record/${doc_id}`, {
+          method: "DELETE",
+          headers: {
+              Authorization: `Bearer ${localStorage.getItem("CodeZone2_Token")}`,
+          },
+      })
+          .then((response) => response.json())
+          .then((data) => {
+              console.log(data);
+              if(data?.success){
+                  fetch("/data/past_uploads", {
+                      headers: {
+                          "Content-Type": "application/x-www-form-urlencoded",
+                          Authorization: `Bearer ${localStorage.getItem("CodeZone2_Token")}`,
+                      },
+                  })
+                      .then((response) => response.json())
+                      .then((data) => {
+                          console.log(data);
+                          if(data?.success){
+                              setExistingData(data?.data);
+                          }
+                      });
+              }
+          });
   };
   useEffect(() => {
     fetch("/data/past_uploads", {
