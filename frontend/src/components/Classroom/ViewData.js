@@ -40,8 +40,24 @@ export default function ViewData(props) {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [evaluators, setEvaluators] = useState([]);
+  const [finalEvaluators, setFinalEvaluators] = useState([]);
   const { data, description, id } = location?.state;
-  console.log("id", id);
+  useEffect(()=>{
+    // api to get the list of all the evaluators mapped in the backend
+    // fetch("/data/evaluators_list", {
+    //   headers: {
+    //     "Content-Type": "application/x-www-form-urlencoded",
+    //     Authorization: `Bearer ${localStorage.getItem("CodeZone2_Token")}`,
+    //   },
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //     if (data?.success) {
+    //       setEvaluators(data?.list);
+    //     }
+    //   });
+  },[])
   const handleSend = (id) => {
     console.log("send called", id);
     //on click of this send email with mentor page to all the mentors present on that excell sheet
