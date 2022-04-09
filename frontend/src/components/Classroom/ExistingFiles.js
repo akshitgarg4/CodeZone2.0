@@ -87,7 +87,7 @@ export default function ExistingFiles(props) {
           <TableBody>
             {existingData.map((row, count) => (
               <TableRow
-                key={row.name}
+                key={count}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
@@ -107,7 +107,9 @@ export default function ExistingFiles(props) {
                       onClick={() =>
                         navigate(`/View-Data/${row.number}`, {
                           state: { data: row.data,
-                          description: row.description },
+                          description: row.description,
+                          id: row.number
+                         },
                         })
                       }
                     >
