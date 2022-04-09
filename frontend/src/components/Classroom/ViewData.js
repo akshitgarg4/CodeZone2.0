@@ -14,6 +14,13 @@ import IconButton from "@mui/material/IconButton";
 import SendIcon from "@mui/icons-material/Send";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
+import Box from '@mui/material/Box';
+import FormLabel from '@mui/material/FormLabel';
+import FormControl from '@mui/material/FormControl';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormHelperText from '@mui/material/FormHelperText';
+import Checkbox from '@mui/material/Checkbox';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -39,7 +46,7 @@ export default function ViewData(props) {
   const location = useLocation();
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const [evaluators, setEvaluators] = useState([]);
+  const [evaluators, setEvaluators] = useState(['Akshit','Gagan','Shayan']);
   const [finalEvaluators, setFinalEvaluators] = useState([]);
   const { data, description, id } = location?.state;
   useEffect(()=>{
@@ -61,7 +68,7 @@ export default function ViewData(props) {
   const handleSend = (id) => {
     console.log("send called", id);
     //on click of this send email with mentor page to all the mentors present on that excell sheet
-    // fetch("/send_email", {
+    // fetch("/send_email_to_mentors", {
     //   method: "POST",
     //   headers: {
     //     "Content-Type": "application/json",
@@ -93,7 +100,70 @@ export default function ViewData(props) {
     //     }, 8000);
     //   });
   };
+  const handleSend2 = (id) => {
+    console.log("send called", id, finalEvaluators);
+    //on click of this send email with mentor page to all the mentors present on that excell sheet
+    // fetch("/send_email_to_evaluators", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Authorization: `Bearer ${localStorage.getItem("CodeZone2_Token")}`,
+    //   },
+    //   body: JSON.stringify({
+    //     id: id,
+    //     evaluators: finalEvaluators,
+    //   }),
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //     if (data?.success) {
+    //       setSuccess("Mails sent successfully");
+    //       setTimeout(() => {
+    //         setSuccess("");
+    //       }, 8000);
+    //     } else {
+    //       setError("Error while sending Plz try again");
+    //       setTimeout(() => {
+    //         setError("");
+    //       }, 8000);
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     setError(err);
+    //     setTimeout(() => {
+    //       setError("");
+    //     }, 8000);
+    //   });
+  };
+  const checkValue = (name) =>{
+    if(finalEvaluators.indexOf(name)=== -1){
+      return false;
+    }else{
+      return true;
+    }
 
+  }
+  const handleChange = (event) => {
+    // setState({
+    //   ...state,
+    //   [event.target.name]: event.target.checked,
+    // });
+    if(checkValue(event.target.name)){
+      //remove
+      let newArray = finalEvaluators.filter(val =>{
+        if(val !== event.target.name){
+          return val;
+        }
+      })
+
+      setFinalEvaluators(newArray);
+    }
+    else{
+      setFinalEvaluators([...finalEvaluators,event.target.name]);
+    }
+  };
+  
   return (
     <div
       style={{
@@ -178,6 +248,26 @@ export default function ViewData(props) {
         <SendIcon />
         &nbsp; Share Link with Mentors
       </IconButton>
+      {evaluators.length && <><Box sx={{ display: 'flex' }}>
+      <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
+        <FormLabel component="legend">Mark Evaluators</FormLabel>
+        <FormGroup>
+          {evaluators.map((name,count)=>{
+            return <FormControlLabel
+            control={
+              <Checkbox checked={checkValue(name)} onChange={handleChange} name={name} />
+            }
+            label={name}
+            key={count}
+          />
+          })} 
+        </FormGroup>
+      </FormControl>
+    </Box>
+    <IconButton color={"primary"} onClick={() => handleSend2(id)}>
+        <SendIcon />
+        &nbsp; Share Link with Evaluators
+      </IconButton></>}
     </div>
   );
 }
