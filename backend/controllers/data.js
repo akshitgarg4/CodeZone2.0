@@ -140,5 +140,46 @@ module.exports.sendLinkMentors = async function(req, res){
 		console.log(teacherEmail);
 	}
 	console.log("All Mails Sent")
-	return results;
+	return res.status(200).json({
+		data: results,
+		success: true,
+		message: "Mails sent",
+	});
+};
+
+module.exports.addEvaluators = async function(req, res){
+	console.log(sanitizer.escape(req.params.record_id));
+	let record = await data.findById(sanitizer.escape(req.params.record_id));
+	if( !record){
+		return res.status(404).json({
+			data: null,
+			success: false,
+			message: "Record not found",
+		});
+	}
+	if(record.coordinator.toString() !== req.user._id){
+		return res.status(403).json({
+			data: null,
+			success: false,
+			message: "Not allowed",
+		});
+	}
+	for(let index = 0; index < req.body.evaluators.length; index++){
+		let evaluator = await User.findOne({name: req.body.evaluators[index]});
+		record.evaluators.push(evaluator);
+		
+	}
+	record = await record.save();
+	if( !record){
+		return res.status(500).json({
+			data: record,
+			success: false,
+			message: "Failed",
+		});
+	}
+	return res.status(201).json({
+		data: record,
+		success: true,
+		message: "Evaluators added",
+	});
 };

@@ -5,6 +5,7 @@ const dataSchema = new mongoose.Schema(
 		title: {type: String, required: true},
 		coordinator: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 		data: [],
+		evaluators: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
 	},
 	{timestamps: true}
 );
