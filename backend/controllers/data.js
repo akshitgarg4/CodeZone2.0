@@ -134,7 +134,7 @@ module.exports.sendLinkMentors = async function(req, res){
 	console.log("Mail Sent To:")
 	let results = [];
 	let subject = "Major Project Evaluation";
-	let text = "Link for entering marks:\n" + "https://localhost:3000/mentor/";
+	let text = "Link for entering marks:\n" + "http://localhost:3000/mentor/";
 	for(const [teacherEmail, teacherID] of Object.entries(mentors)){
 		results.push(await sendMail(teacherEmail, subject, text + teacherID + "\nCoordinator\n"));
 		console.log(teacherEmail);
@@ -148,7 +148,6 @@ module.exports.sendLinkMentors = async function(req, res){
 };
 
 module.exports.addEvaluators = async function(req, res){
-	console.log(sanitizer.escape(req.params.record_id));
 	let record = await data.findById(sanitizer.escape(req.params.record_id));
 	if( !record){
 		return res.status(404).json({
@@ -181,5 +180,33 @@ module.exports.addEvaluators = async function(req, res){
 		data: record,
 		success: true,
 		message: "Evaluators added",
+	});
+};
+
+module.exports.fetchEvaluatorsList = async function(req, res){
+	let record = await data.findById(sanitizer.escape(req.params.record_id));
+	if( !record){
+		return res.status(404).json({
+			data: null,
+			success: false,
+			message: "Record not found",
+		});
+	}
+	if(record.coordinator.toString() !== req.user._id){
+		return res.status(403).json({
+			data: null,
+			success: false,
+			message: "Not allowed",
+		});
+	}
+	let evaluatorList = []
+	for(let index = 0; index < record.evaluators.length; index++){
+		let evaluator = await User.findById(record.evaluators[index]);
+		evaluatorList.push(evaluator.name);
+	}
+	return res.status(201).json({
+		data: evaluatorList,
+		success: true,
+		message: "Evaluator List",
 	});
 };

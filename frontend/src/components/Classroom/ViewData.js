@@ -53,19 +53,21 @@ export default function ViewData(props){
 	const {data, description, id} = location?.state;
 	useEffect(() => {
 		// api to get the list of all the evaluators mapped in the backend
-		// fetch("/data/evaluators_list", {
-		//   headers: {
-		//     "Content-Type": "application/x-www-form-urlencoded",
-		//     Authorization: `Bearer ${localStorage.getItem("CodeZone2_Token")}`,
-		//   },
-		// })
-		//   .then((response) => response.json())
-		//   .then((data) => {
-		//     console.log(data);
-		//     if (data?.success) {
-		//       setEvaluators(data?.list);
-		//     }
-		//   });
+		console.log(id)
+		fetch(`/data/evaluators_list/${id}`, {
+			headers: {
+				"Content-Type": "application/x-www-form-urlencoded",
+				Authorization: `Bearer ${localStorage.getItem("CodeZone2_Token")}`,
+			},
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				console.log(data, "WW");
+				if(data?.success){
+					console.log(data, "RR");
+					setEvaluators(data?.data);
+				}
+			});
 	}, [])
 	const handleSend = (id) => {
 		console.log("send called", id);
@@ -101,38 +103,37 @@ export default function ViewData(props){
 	const handleSend2 = (id) => {
 		console.log("send called", id, finalEvaluators);
 		//on click of this send email with mentor page to all the mentors present on that excell sheet
-		// fetch("/send_email_to_evaluators", {
-		//   method: "POST",
-		//   headers: {
-		//     "Content-Type": "application/json",
-		//     Authorization: `Bearer ${localStorage.getItem("CodeZone2_Token")}`,
-		//   },
-		//   body: JSON.stringify({
-		//     id: id,
-		//     evaluators: finalEvaluators,
-		//   }),
-		// })
-		//   .then((response) => response.json())
-		//   .then((data) => {
-		//     console.log(data);
-		//     if (data?.success) {
-		//       setSuccess("Mails sent successfully");
-		//       setTimeout(() => {
-		//         setSuccess("");
-		//       }, 8000);
-		//     } else {
-		//       setError("Error while sending Plz try again");
-		//       setTimeout(() => {
-		//         setError("");
-		//       }, 8000);
-		//     }
-		//   })
-		//   .catch((err) => {
-		//     setError(err);
-		//     setTimeout(() => {
-		//       setError("");
-		//     }, 8000);
-		//   });
+		fetch(`data/send_email_to_evaluators/${id}`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${localStorage.getItem("CodeZone2_Token")}`,
+			},
+			body: JSON.stringify({
+				evaluators: finalEvaluators,
+			}),
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				console.log(data);
+				if(data?.success){
+					setSuccess("Mails sent successfully");
+					setTimeout(() => {
+						setSuccess("");
+					}, 8000);
+				} else{
+					setError("Error while sending Plz try again");
+					setTimeout(() => {
+						setError("");
+					}, 8000);
+				}
+			})
+			.catch((err) => {
+				setError(err);
+				setTimeout(() => {
+					setError("");
+				}, 8000);
+			});
 	};
 	const checkValue = (name) => {
 		if(finalEvaluators.indexOf(name) === -1){
