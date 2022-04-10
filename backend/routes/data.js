@@ -9,5 +9,7 @@ router.get('/past_uploads', auth.authenticateToken, data.fetch);
 router.delete('/delete_record/:record_id', auth.authenticateToken, data.delete);
 router.get('/send_email_to_mentors/:record_id', auth.authenticateToken, data.sendLinkMentors);
 router.get('/evaluators_list/:record_id', auth.authenticateToken, data.fetchEvaluatorsList);
+router.post('/send_email_to_evaluators/:record_id', auth.authenticateToken, data.sendLinkEvaluators);
+
 
 module.exports = router;

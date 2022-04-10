@@ -13,7 +13,7 @@ module.exports.save = async function(req, res){
 	});
 	let DataFromExcel = req.body.data;
 	for(let index = 0; index < DataFromExcel.length; index++){
-		// console.log(DataFromExcel[index]);
+		
 		let newGroup = await groups.create({
 			GroupNumber: DataFromExcel[index]["S.No."],
 			student_1: DataFromExcel[index]["Student A"],
@@ -108,7 +108,6 @@ module.exports.delete = async function(req, res){
 
 
 module.exports.sendLinkMentors = async function(req, res){
-	console.log(sanitizer.escape(req.params.record_id));
 	let record = await data.findById(sanitizer.escape(req.params.record_id));
 	if( !record){
 		return res.status(404).json({
@@ -133,8 +132,8 @@ module.exports.sendLinkMentors = async function(req, res){
 	}
 	console.log("Mail Sent To:")
 	let results = [];
-	let subject = "Major Project Evaluation";
-	let text = "Link for entering marks:\n" + "http://localhost:3000/mentor/";
+	let subject = "Major Project Evaluation - Evaluator";
+	let text = "Link for entering marks:\n" + "http://localhost:3000/" + record._id + "/mentor/";
 	for(const [teacherEmail, teacherID] of Object.entries(mentors)){
 		results.push(await sendMail(teacherEmail, subject, text + teacherID + "\nCoordinator\n"));
 		console.log(teacherEmail);
@@ -208,5 +207,48 @@ module.exports.fetchEvaluatorsList = async function(req, res){
 		data: evaluatorList,
 		success: true,
 		message: "Evaluator List",
+	});
+};
+
+
+module.exports.sendLinkEvaluators = async function(req, res){
+	let record = await data.findById(sanitizer.escape(req.params.record_id));
+	if( !record){
+		return res.status(404).json({
+			data: null,
+			success: false,
+			message: "Record not found",
+		});
+	}
+	if(record.coordinator.toString() !== req.user._id){
+		return res.status(403).json({
+			data: null,
+			success: false,
+			message: "Not allowed",
+		});
+	}
+	let finalEvaluators = req.body.finalEvaluators;
+	let recipients = {};
+	for(let index = 0; index < finalEvaluators.length; index++){
+		
+		let user = await User.findOne({name: finalEvaluators[index]});
+		if(user){
+			recipients[user.email] = user._id;
+		}
+	}
+	
+	console.log("Mail Sent To:")
+	let results = [];
+	let subject = "Major Project Evaluation";
+	let text = "Link for entering marks:\n" + "http://localhost:3000/" + record._id + "/evaluator/";
+	for(const [teacherEmail, teacherID] of Object.entries(recipients)){
+		results.push(await sendMail(teacherEmail, subject, text + teacherID + "\nCoordinator\n"));
+		console.log(teacherEmail);
+	}
+	console.log("All Mails Sent")
+	return res.status(200).json({
+		data: results,
+		success: true,
+		message: "Mails sent",
 	});
 };
