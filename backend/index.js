@@ -1,7 +1,5 @@
 const express = require("express");
 const port = 8000;
-const db = require("./config/mongoose");
-const jwt = require('jsonwebtoken');
 const {createUsers} = require("./addTeachers");
 
 const app = express();
@@ -18,3 +16,4 @@ app.listen(port, function(err){
 });
 
 createUsers();
+// sendMail(['gaganpreetsinghkhurana.be18cse@pec.edu.in'],"Testing CodeZone 2.0 mails","Congrats, mail feature is working");

@@ -70,37 +70,34 @@ export default function ViewData(props){
 	const handleSend = (id) => {
 		console.log("send called", id);
 		//on click of this send email with mentor page to all the mentors present on that excell sheet
-		// fetch("/send_email_to_mentors", {
-		//   method: "POST",
-		//   headers: {
-		//     "Content-Type": "application/json",
-		//     Authorization: `Bearer ${localStorage.getItem("CodeZone2_Token")}`,
-		//   },
-		//   body: JSON.stringify({
-		//     id: id,
-		//   }),
-		// })
-		//   .then((response) => response.json())
-		//   .then((data) => {
-		//     console.log(data);
-		//     if (data?.success) {
-		//       setSuccess("Mails sent successfully");
-		//       setTimeout(() => {
-		//         setSuccess("");
-		//       }, 8000);
-		//     } else {
-		//       setError("Error while sending Plz try again");
-		//       setTimeout(() => {
-		//         setError("");
-		//       }, 8000);
-		//     }
-		//   })
-		//   .catch((err) => {
-		//     setError(err);
-		//     setTimeout(() => {
-		//       setError("");
-		//     }, 8000);
-		//   });
+		fetch("/send_email_to_mentors/" + id, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${localStorage.getItem("CodeZone2_Token")}`,
+			},
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				console.log(data);
+				if(data?.success){
+					setSuccess("Mails sent successfully");
+					setTimeout(() => {
+						setSuccess("");
+					}, 8000);
+				} else{
+					setError("Error while sending Plz try again");
+					setTimeout(() => {
+						setError("");
+					}, 8000);
+				}
+			})
+			.catch((err) => {
+				setError(err);
+				setTimeout(() => {
+					setError("");
+				}, 8000);
+			});
 	};
 	const handleSend2 = (id) => {
 		console.log("send called", id, finalEvaluators);
