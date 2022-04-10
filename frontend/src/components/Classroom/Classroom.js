@@ -61,7 +61,7 @@ export default function Classroom() {
             const workBook = read(data);
             const worksheet = workBook.Sheets[workBook.SheetNames[0]];
             const jsonData = utils.sheet_to_json(worksheet);
-            console.log(jsonData);
+            // console.log(jsonData);
             setData(jsonData);
             setSuccess("File Uploaded successfully !!!");
             setTimeout(() => {
