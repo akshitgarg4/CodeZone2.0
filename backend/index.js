@@ -1,5 +1,7 @@
 const express = require("express");
 const port = 8000;
+const db = require("./config/mongoose");
+const jwt = require('jsonwebtoken');
 const {createUsers} = require("./addTeachers");
 
 const app = express();

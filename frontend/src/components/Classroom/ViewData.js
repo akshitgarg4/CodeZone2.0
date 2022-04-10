@@ -70,10 +70,9 @@ export default function ViewData(props){
 	const handleSend = (id) => {
 		console.log("send called", id);
 		//on click of this send email with mentor page to all the mentors present on that excell sheet
-		fetch("/send_email_to_mentors/" + id, {
-			method: "POST",
+		fetch(`/data/send_email_to_mentors/${id}`, {
+			method: "GET",
 			headers: {
-				"Content-Type": "application/json",
 				Authorization: `Bearer ${localStorage.getItem("CodeZone2_Token")}`,
 			},
 		})
