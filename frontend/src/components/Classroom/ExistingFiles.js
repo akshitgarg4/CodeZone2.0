@@ -76,7 +76,6 @@ export default function ExistingFiles(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (data?.success) {
           setExistingData(data?.data);
         }
@@ -110,6 +109,7 @@ export default function ExistingFiles(props) {
               <TableCell align="right">Date Uploaded</TableCell>
               <TableCell align="right">Time Uploaded</TableCell>
               <TableCell align="right">View Data</TableCell>
+              <TableCell align="right">View Marks</TableCell>
               <TableCell align="right">Delete</TableCell>
             </TableRow>
           </TableHead>
@@ -144,6 +144,22 @@ export default function ExistingFiles(props) {
                       }
                     >
                       View Data
+                    </button>
+                  )}
+                </TableCell>
+                <TableCell align="right">
+                  {row.number && (
+                    <button
+                      onClick={() =>
+                        navigate(`/View-Marks/${row.number}`, {
+                          state: {
+                            description: row.description,
+                            id: row.number,
+                          },
+                        })
+                      }
+                    >
+                      View Marks
                     </button>
                   )}
                 </TableCell>
