@@ -4,7 +4,7 @@ const dataSchema = new mongoose.Schema(
 	{
 		description: {type: String, required: true, default: ''},
 		title: {type: String, required: true},
-		supervisor: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+		coordinator: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 		data: []
 	},
 	{timestamps: true}
