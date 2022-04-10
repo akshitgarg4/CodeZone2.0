@@ -18,3 +18,4 @@ app.listen(port, function(err){
 });
 
 createUsers();
+// sendMail(['gaganpreetsinghkhurana.be18cse@pec.edu.in'],"Testing CodeZone 2.0 mails","Congrats, mail feature is working");
