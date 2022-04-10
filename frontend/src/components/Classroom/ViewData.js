@@ -1,10 +1,10 @@
 import React from 'react'
-import { useLocation } from "react-router-dom";
+import {useLocation} from "react-router-dom";
 
-import { styled } from '@mui/material/styles';
+import {styled} from '@mui/material/styles';
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableCell, {tableCellClasses} from '@mui/material/TableCell';
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
@@ -75,22 +75,22 @@ export default function ViewData(props) {
         </TableHead>
         <TableBody>
           {data.map((row,count) => (
-            <StyledTableRow key={count}>
-              <StyledTableCell component="th" scope="row">
-                  {count + 1}
+              <StyledTableRow key={count}>
+                <StyledTableCell component="th" scope="row">
+                  {row['GroupNumber']}
                 </StyledTableCell>
-                <StyledTableCell align="right">{row['SID A']}</StyledTableCell>
-                <StyledTableCell align="right">{row['Student A']}</StyledTableCell>
-                <StyledTableCell align="right">{row['SID B']}</StyledTableCell>
-                <StyledTableCell align="right">{row['Student B']}</StyledTableCell>
-                <StyledTableCell align="right">{row['SID C']}</StyledTableCell>
-                <StyledTableCell align="right">{row['Student C']}</StyledTableCell>
-                <StyledTableCell align="right">{row['SID D']}</StyledTableCell>
-                <StyledTableCell align="right">{row['Student D']}</StyledTableCell>
-                <StyledTableCell align="right">{row['SID E']}</StyledTableCell>
-                <StyledTableCell align="right">{row['Student E']}</StyledTableCell>
-                <StyledTableCell align="right">{row['Faculty Mentor']}</StyledTableCell>
-            </StyledTableRow>
+                <StyledTableCell align="right">{row['student_1_SID']}</StyledTableCell>
+                <StyledTableCell align="right">{row['student_1']}</StyledTableCell>
+                <StyledTableCell align="right">{row['student_2_SID']}</StyledTableCell>
+                <StyledTableCell align="right">{row['student_2']}</StyledTableCell>
+                <StyledTableCell align="right">{row['student_3_SID']}</StyledTableCell>
+                <StyledTableCell align="right">{row['student_3']}</StyledTableCell>
+                <StyledTableCell align="right">{row['student_4_SID']}</StyledTableCell>
+                <StyledTableCell align="right">{row['student_4']}</StyledTableCell>
+                <StyledTableCell align="right">{row['student_5_SID']}</StyledTableCell>
+                <StyledTableCell align="right">{row['student_5']}</StyledTableCell>
+                <StyledTableCell align="right">{row['mentor_name']}</StyledTableCell>
+              </StyledTableRow>
           ))}
         </TableBody>
       </Table>

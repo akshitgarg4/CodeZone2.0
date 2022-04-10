@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-
 const dataSchema = new mongoose.Schema(
 	{
 		description: {type: String, required: true, default: ''},
@@ -10,5 +9,8 @@ const dataSchema = new mongoose.Schema(
 	{timestamps: true}
 );
 
+
 const data = mongoose.model("data", dataSchema);
+
+
 module.exports = data;

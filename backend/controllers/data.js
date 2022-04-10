@@ -12,6 +12,7 @@ module.exports.save = async function(req, res){
   });
   let DataFromExcel = req.body.data;
   for(let index = 0; index < DataFromExcel.length; index++){
+    // console.log(DataFromExcel[index]);
     let newGroup = await groups.create({
       GroupNumber: DataFromExcel[index]["S.No."],
       student_1: DataFromExcel[index]["Student A"],
@@ -46,7 +47,7 @@ module.exports.save = async function(req, res){
 };
 module.exports.fetch = async function(req, res){
   let previousData = [];
-  let allData = await data.find({supervisor: req.user._id});
+  let allData = await data.find({coordinator: req.user._id});
   for(let index = 0; index < allData.length; index++){
     let currentData = {
       number: allData[index]._id,
@@ -77,12 +78,16 @@ module.exports.delete = async function(req, res){
   }
   
   
-  if(record.supervisor.toString() !== req.user._id){
+  if(record.coordinator.toString() !== req.user._id){
     return res.status(403).json({
       data: null,
       success: false,
       message: "Not allowed",
     });
+  }
+  for(let index = 0; index < record.data.length; index++){
+    let groupID = record.data[index];
+    await groups.findByIdAndDelete(groupID);
   }
   await data.findByIdAndDelete(record._id);
   record = await data.findById(sanitizer.escape(req.params.record_id));
