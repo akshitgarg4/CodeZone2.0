@@ -3,9 +3,10 @@ import { connect } from "react-redux";
 import Page404 from "./Page404/Page404";
 import Nav from "./Navbar/Nav";
 import Login from "./Login/Login";
-import Classroom from "./Classroom/Classroom";
+import Classroom from "./Coordinator/Coordinator_Page";
 import Mentor from "./MentorPage/MentorPage";
-import ViewData from "./Classroom/ViewData";
+import ViewData from "./Coordinator/View_File";
+import ViewMarks from "./Coordinator/View_Marks";
 
 import { Paper } from "@mui/material";
 // @ts-ignore
@@ -39,6 +40,9 @@ class App extends React.Component {
             {auth.isLoggedIn && <Route path="/mentor" element={<Mentor />} />}
             {auth.isLoggedIn && (
               <Route path="/View-Data/:dataId" element={<ViewData />} />
+            )}
+            {auth.isLoggedIn && (
+              <Route path="/View-Marks/:dataId" element={<ViewMarks />} />
             )}
             <Route component={Page404} />
           </Routes>

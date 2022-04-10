@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { read, utils } from "xlsx";
-import ExistingFiles from "./ExistingFiles";
+import ExistingFiles from "./Existing_Files";
 
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
@@ -47,12 +47,12 @@ export default function Classroom() {
     }
   };
   const handleFile = async (e) => {
-    console.log(e.target.files[0]);
+    // console.log(e.target.files[0]);
     if (e.target.files[0] && e.target.files[0].name) {
       let parts = e.target.files[0].name.split(".");
       if (parts && parts.length > 1) {
         let ext = parts[parts.length - 1];
-        console.log(ext);
+        // console.log(ext);
         switch (ext.toLowerCase()) {
           case "xlsx": {
             const file = e.target.files[0];
