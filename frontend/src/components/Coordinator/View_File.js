@@ -66,7 +66,7 @@ export default function ViewData(props) {
     //   });
   },[])
   const handleSend = (id) => {
-    console.log("send called", id);
+    // console.log("send called", id);
     //on click of this send email with mentor page to all the mentors present on that excell sheet
     // fetch("/send_email_to_mentors", {
     //   method: "POST",
@@ -101,7 +101,7 @@ export default function ViewData(props) {
     //   });
   };
   const handleSend2 = (id) => {
-    console.log("send called", id, finalEvaluators);
+    // console.log("send called", id, finalEvaluators);
     //on click of this send email with mentor page to all the mentors present on that excell sheet
     // fetch("/send_email_to_evaluators", {
     //   method: "POST",

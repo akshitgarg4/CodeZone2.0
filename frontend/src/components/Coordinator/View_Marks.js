@@ -11,7 +11,7 @@ export default function ViewMarks() {
   const [existingMarks, setExistingMarks] = useState([]);
 
   // useEffect(() => {
-  //   //send marks of all the students both midsem and endsem for the documents uploaded by the logged in teacher
+  //   //send marks of all the students both midsem and endsem for the document with id = id
   //   format [{name:' ',sid: ' ', group_no:' ', mentor:' ', midsem_marks:['evaluator_1_name':{'presentation': ' ', viva: ' ',interaction: ' ',implementation:' '},'evaluator_2_name':{'presentation': ' ', viva: ' ',interaction: ' ',implementation:' '}], endsem_marks:['evaluator_1_name':{'presentation': ' ', viva: ' ',interaction: ' ',implementation:' ',report:''},'evaluator_2_name':{'presentation': ' ', viva: ' ',interaction: ' ',implementation:' ',report:' '}], grade_assigned: ' ',group_remarks:' '}]
   //   fetch("/data/existing_marks", {
   //     method: "POST",

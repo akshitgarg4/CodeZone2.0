@@ -32,7 +32,7 @@ export default function ExistingFiles(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data?.success) {
           fetch("/data/past_uploads", {
             headers: {
