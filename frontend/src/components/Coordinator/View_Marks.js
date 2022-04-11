@@ -15,6 +15,50 @@ export default function ViewMarks(){
 	useEffect(() => {
 		//send marks of all the students both midsem and endsem for the document with id = id
 		// format [{name:' ',sid: ' ', group_no:' ', mentor:' ', midsem_marks:['evaluator_1_name':{'presentation': ' ', viva: ' ',interaction: ' ',implementation:' '},'evaluator_2_name':{'presentation': ' ', viva: ' ',interaction: ' ',implementation:' '}], endsem_marks:['evaluator_1_name':{'presentation': ' ', viva: ' ',interaction: ' ',implementation:' ',report:''},'evaluator_2_name':{'presentation': ' ', viva: ' ',interaction: ' ',implementation:' ',report:' '}], grade_assigned: ' ',group_remarks:' '}]
+		// updated format
+		// format:[{groupID: -,
+		// 	studentID: -, //index in this group object
+		// 	GroupNumber: -,
+		// 	mentor: -,
+		// 	name: -,
+		// 	sid: -,
+		// 	grade: -,
+		// 	groupRemarks: -,
+		// 	midSemesterMarks: {
+		// 	evaluator:{
+		//		presentation: -,
+		// 		viva: -,
+		// 		implementation: -,
+		// 	},
+		// 	mentor:{
+		//		presentation: -,
+		// 		viva: -,
+		// 		implementation: -,
+		// 		interaction: -,
+		// 		remarks: -
+		// 	}
+		// }
+		// endSemesterMarks: {
+		// 	evaluator:{
+		//		presentation: -,
+		// 		viva: -,
+		// 		implementation: -,
+		//      report: -,
+		// 	},
+		// 	mentor:{
+		//		presentation: -,
+		// 		viva: -,
+		// 		implementation: -,
+		// 		interaction: -,
+		// 		remarks: -
+		// 	}
+		// },
+		// totalMarks: {
+		// 	endSemester: -,
+		// 		midSemester: -,
+		// 		totalMarks: -,
+		//
+		// }]
 		fetch(`/data/existing_marks/${id}`, {
 			method: "GET",
 			headers: {
