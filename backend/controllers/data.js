@@ -203,17 +203,28 @@ module.exports.addEvaluators = async function(req, res){
 	}
 	for(let index = 0; index < req.body.evaluators.length; index++){
 		let evaluator = await User.findOne({name: req.body.evaluators[index]});
-		record.evaluators.push(evaluator);
-		record.midSemesterMarks[evaluator._id] = {
-			presentation: [0, 0, 0, 0, 0],
-			viva: [0, 0, 0, 0, 0],
-			implementation: [0, 0, 0, 0, 0]
+		if(record.evaluators.includes(evaluator._id)){
+			continue;
 		}
-		record.endSemesterMarks[evaluator._id] = {
-			presentation: [0, 0, 0, 0, 0],
-			viva: [0, 0, 0, 0, 0],
-			implementation: [0, 0, 0, 0, 0],
-			report: [0, 0, 0, 0, 0],
+		record.evaluators.push(evaluator);
+		for(let group = 0; group < record.data.length; group++){
+			// console.log(evaluator._id,"EE");
+			let currentGroup = await groups.findById(record.data[group]);
+			currentGroup.midSemesterMarks[evaluator._id.toString()] = {
+				presentation: [0, 0, 0, 0, 0],
+				viva: [0, 0, 0, 0, 0],
+				implementation: [0, 0, 0, 0, 0]
+			}
+			currentGroup.endSemesterMarks[evaluator._id] = {
+				presentation: [0, 0, 0, 0, 0],
+				viva: [0, 0, 0, 0, 0],
+				implementation: [0, 0, 0, 0, 0],
+				report: [0, 0, 0, 0, 0],
+			}
+			await currentGroup.markModified('endSemesterMarks');
+			await currentGroup.markModified('midSemesterMarks');
+			currentGroup = await currentGroup.save();
+			
 		}
 	}
 	record = await record.save();
@@ -232,25 +243,10 @@ module.exports.addEvaluators = async function(req, res){
 };
 
 module.exports.fetchEvaluatorsList = async function(req, res){
-	let record = await data.findById(sanitizer.escape(req.params.record_id));
-	if( !record){
-		return res.status(404).json({
-			data: null,
-			success: false,
-			message: "Record not found",
-		});
-	}
-	if(record.coordinator.toString() !== req.user._id){
-		return res.status(403).json({
-			data: null,
-			success: false,
-			message: "Not allowed",
-		});
-	}
+	let users = await User.find();
 	let evaluatorList = []
-	for(let index = 0; index < record.evaluators.length; index++){
-		let evaluator = await User.findById(record.evaluators[index]);
-		evaluatorList.push(evaluator.name);
+	for(let index = 0; index < users.length; index++){
+		evaluatorList.push(users[index].name);
 	}
 	return res.status(201).json({
 		data: evaluatorList,
@@ -344,7 +340,7 @@ module.exports.fetchStudentMarks = async function(req, res){
 			}
 			for(let [faculty, marks] of Object.entries(group.midSemesterMarks)){
 				if(faculty === "mentor"){
-					currentStudent.midSemesterMarks[currentStudent.mentor] = {
+					currentStudent.midSemesterMarks["mentor"] = {
 						presentation: marks.presentation[studentNumber],
 						viva: marks.viva[studentNumber],
 						implementation: marks.implementation[studentNumber],
@@ -352,8 +348,10 @@ module.exports.fetchStudentMarks = async function(req, res){
 						remarks: marks.remarks[studentNumber]
 					};
 				} else{
-					let evaluator = await User.findById(faculty).name;
-					currentStudent.midSemesterMarks[evaluator] = {
+					let evaluator = await User.findById(faculty);
+					
+					currentStudent.midSemesterMarks[evaluator.name] = {
+						evaluatorID: evaluator._id,
 						presentation: marks.presentation[studentNumber],
 						viva: marks.viva[studentNumber],
 						implementation: marks.implementation[studentNumber]
@@ -362,7 +360,7 @@ module.exports.fetchStudentMarks = async function(req, res){
 			}
 			for(let [faculty, marks] of Object.entries(group.endSemesterMarks)){
 				if(faculty === "mentor"){
-					currentStudent.endSemesterMarks[currentStudent.mentor] = {
+					currentStudent.endSemesterMarks["mentor"] = {
 						presentation: marks.presentation[studentNumber],
 						viva: marks.viva[studentNumber],
 						implementation: marks.implementation[studentNumber],
@@ -370,8 +368,9 @@ module.exports.fetchStudentMarks = async function(req, res){
 						remarks: marks.remarks[studentNumber]
 					};
 				} else{
-					let evaluator = await User.findById(faculty).name;
-					currentStudent.endSemesterMarks[evaluator] = {
+					let evaluator = await User.findById(faculty);
+					currentStudent.endSemesterMarks[evaluator.name] = {
+						evaluatorID: evaluator._id,
 						presentation: marks.presentation[studentNumber],
 						viva: marks.viva[studentNumber],
 						implementation: marks.implementation[studentNumber],
