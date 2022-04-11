@@ -15,6 +15,10 @@ module.exports.login = async function (req, res) {
         const { name, email, picture } = response?.payload;
         let user = await User.findOne({ email: email });
         if (user) {
+          if(user.picture === ""){
+            user.picture = picture;
+            user = await user.save();
+          }
           let tokenDetails = {
             name: user.name,
             _id: user._id,
