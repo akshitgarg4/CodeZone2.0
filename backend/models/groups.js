@@ -3,16 +3,8 @@ const mongoose = require("mongoose");
 const groupsSchema = new mongoose.Schema(
 	{
 		GroupNumber: {type: Number},
-		student_1: {type: String},
-		student_1_SID: {type: Number},
-		student_2: {type: String},
-		student_2_SID: {type: Number},
-		student_3: {type: String},
-		student_3_SID: {type: Number},
-		student_4: {type: String},
-		student_4_SID: {type: Number},
-		student_5: {type: String},
-		student_5_SID: {type: Number},
+		students: ["", "", "", "", ""],
+		SID: [0, 0, 0, 0, 0],
 		mentor: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 		mentor_name: {
 			type: String,
@@ -26,9 +18,7 @@ const groupsSchema = new mongoose.Schema(
 		midSemesterMarks: {},
 		endSemesterMarks: {},
 		totalMarks: {},
-		grade: {
-			type: String, default: ""
-		},
+		grade: ["", "", "", "", ""],
 		groupRemarks: {
 			type: String, default: ""
 		},
