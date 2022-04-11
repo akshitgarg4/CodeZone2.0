@@ -27,6 +27,9 @@ module.exports.save = async function(req, res){
 			student_5: DataFromExcel[index]["Student E"],
 			student_5_SID: DataFromExcel[index]["SID E"],
 			mentor: await User.findOne({name: DataFromExcel[index]["Faculty Mentor"]}),
+			midSemesterMarks: {},
+			endSemesterMarks: {},
+			totalMarks: {},
 		})
 		newGroup = await newGroup.save();
 		newData.data.push(newGroup);

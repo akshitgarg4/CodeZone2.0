@@ -22,7 +22,17 @@ const groupsSchema = new mongoose.Schema(
 				}
 				return "";
 			}
-		}
+		},
+		midSemesterMarks: {},
+		endSemesterMarks: {},
+		totalMarks: {},
+		grade: {
+			type: String, default: ""
+		},
+		groupRemarks: {
+			type: String, default: ""
+		},
+		
 	},
 	{timestamps: true}
 );
