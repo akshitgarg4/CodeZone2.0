@@ -14,6 +14,7 @@ module.exports.createUsers = async function(){
 			teacherDocument = await User.create({
 				"name": teacherName,
 				"email": teacherEmail.toLowerCase(),
+				"picture": "",
 			})
 			teacherDocument = await teacherDocument.save();
 			newTeachers.push([teacherName, teacherEmail.toLowerCase()])

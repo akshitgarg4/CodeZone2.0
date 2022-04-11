@@ -201,25 +201,25 @@ export default function ViewData(props){
 								<StyledTableCell component="th" scope="row">
 									{row['GroupNumber']}
 								</StyledTableCell>
-								<StyledTableCell align="right">{row['student_1_SID']}</StyledTableCell>
+								<StyledTableCell align="right">{row['students'][0]}</StyledTableCell>
 								<StyledTableCell align="right">
-									{row['student_1']}
+									{row['SID'][0]}
 								</StyledTableCell>
-								<StyledTableCell align="right">{row['student_2_SID']}</StyledTableCell>
+								<StyledTableCell align="right">{row['students'][1]}</StyledTableCell>
 								<StyledTableCell align="right">
-									{row['student_2']}
+									{row['SID'][1]}
 								</StyledTableCell>
-								<StyledTableCell align="right">{row['student_3_SID']}</StyledTableCell>
+								<StyledTableCell align="right">{row['students'][2]}</StyledTableCell>
 								<StyledTableCell align="right">
-									{row['student_3']}
+									{row['SID'][2]}
 								</StyledTableCell>
-								<StyledTableCell align="right">{row['student_4_SID']}</StyledTableCell>
+								<StyledTableCell align="right">{row['students'][3]}</StyledTableCell>
 								<StyledTableCell align="right">
-									{row['student_4']}
+									{row['SID'][3]}
 								</StyledTableCell>
-								<StyledTableCell align="right">{row['student_5_SID']}</StyledTableCell>
+								<StyledTableCell align="right">{row['students'][4]}</StyledTableCell>
 								<StyledTableCell align="right">
-									{row['student_5']}
+									{row['SID'][4]}
 								</StyledTableCell>
 								<StyledTableCell align="right">
 									{row['mentor_name']}
