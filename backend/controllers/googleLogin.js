@@ -1,5 +1,5 @@
-const { OAuth2Client } = require("google-auth-library");
-const SECRET = require("../config/credentials");
+const {OAuth2Client} = require("google-auth-library");
+const {SECRET} = require("../config/credentials");
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 const client = new OAuth2Client(SECRET.CLIENT_ID);

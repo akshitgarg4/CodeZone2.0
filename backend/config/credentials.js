@@ -1,9 +1,9 @@
-const SECRET = {
-    CLIENT_ID: '626526940054-1l3u3mkcp8pd34v695mi4gt2f5k79hfi.apps.googleusercontent.com',
-    CLIENT_SECRET_KEY: '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',
-}
-module.exports = SECRET;
-module.exports = SECRET_MAIL = {
+module.exports.SECRET = {
+	CLIENT_ID: '626526940054-1l3u3mkcp8pd34v695mi4gt2f5k79hfi.apps.googleusercontent.com',
+	CLIENT_SECRET_KEY: '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',
+};
+
+module.exports.SECRET_MAIL = {
 	CLIENT_ID: '251136267954-aq51npde2d3ghc6in7j2nvgp6kdv36gv.apps.googleusercontent.com',
 	CLIENT_SECRET_KEY: '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',
 	EMAIL: 'codezonemajorproject@gmail.com',

@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer');
-const SECRET_MAIL = require("../config/credentials");
+const {SECRET_MAIL} = require("../config/credentials");
 
 let transporter = nodemailer.createTransport({
 	service: 'gmail',
