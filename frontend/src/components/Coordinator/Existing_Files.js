@@ -93,88 +93,100 @@ export default function ExistingFiles(props) {
         m: 2,
       }}
     >
-      <Typography component="h1" variant="h5">
-        Past Uploaded Files!!
-      </Typography>
-      <TableContainer
-        component={Paper}
-        style={{ paddingLeft: "100px", paddingTop: "50px" }}
-      >
-        <Table sx={{ maxWidth: 950 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>S. No.</TableCell>
-              <TableCell align="right">File Name</TableCell>
-              <TableCell align="right">Description</TableCell>
-              <TableCell align="right">Date Uploaded</TableCell>
-              <TableCell align="right">Time Uploaded</TableCell>
-              <TableCell align="right">View Data</TableCell>
-              <TableCell align="right">View Marks</TableCell>
-              <TableCell align="right">Delete</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {existingData.map((row, count) => (
-              <TableRow
-                key={count}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {count + 1}
-                </TableCell>
-                <TableCell align="right">{row.fileName}</TableCell>
-                <TableCell align="right">{row.description}</TableCell>
-                <TableCell align="right">
-                  {row.dateUploaded.slice(0, 10)}
-                </TableCell>
-                <TableCell align="right">
-                  {row.timeUploaded.slice(11, 19)}
-                </TableCell>
-                <TableCell align="right">
-                  {row.number && (
-                    <button
-                      onClick={() =>
-                        navigate(`/View-Data/${row.number}`, {
-                          state: {
-                            data: row.data,
-                            description: row.description,
-                            id: row.number,
-                          },
-                        })
-                      }
-                    >
-                      View Data
-                    </button>
-                  )}
-                </TableCell>
-                <TableCell align="right">
-                  {row.number && (
-                    <button
-                      onClick={() =>
-                        navigate(`/View-Marks/${row.number}`, {
-                          state: {
-                            description: row.description,
-                            id: row.number,
-                          },
-                        })
-                      }
-                    >
-                      View Marks
-                    </button>
-                  )}
-                </TableCell>
-                <TableCell align="right">
-                  {row.number && (
-                    <IconButton>
-                      <DeleteIcon onClick={() => handleDelete(row.number)} />
-                    </IconButton>
-                  )}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      {existingData?.length > 0 ? (
+        <>
+          <Typography component="h1" variant="h5">
+            Past Uploaded Files!!
+          </Typography>
+          <TableContainer
+            component={Paper}
+            style={{ paddingLeft: "100px", paddingTop: "50px" }}
+          >
+            <Table sx={{ maxWidth: 950 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>S. No.</TableCell>
+                  <TableCell align="right">File Name</TableCell>
+                  <TableCell align="right">Description</TableCell>
+                  <TableCell align="right">Date Uploaded</TableCell>
+                  <TableCell align="right">Time Uploaded</TableCell>
+                  <TableCell align="right">View Data</TableCell>
+                  <TableCell align="right">View Marks</TableCell>
+                  <TableCell align="right">Delete</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {existingData.map((row, count) => (
+                  <TableRow
+                    key={count}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {count + 1}
+                    </TableCell>
+                    <TableCell align="right">{row.fileName}</TableCell>
+                    <TableCell align="right">{row.description}</TableCell>
+                    <TableCell align="right">
+                      {row.dateUploaded.slice(0, 10)}
+                    </TableCell>
+                    <TableCell align="right">
+                      {row.timeUploaded.slice(11, 19)}
+                    </TableCell>
+                    <TableCell align="right">
+                      {row.number && (
+                        <button
+                          onClick={() =>
+                            navigate(`/View-Data/${row.number}`, {
+                              state: {
+                                data: row.data,
+                                description: row.description,
+                                id: row.number,
+                              },
+                            })
+                          }
+                        >
+                          View Data
+                        </button>
+                      )}
+                    </TableCell>
+                    <TableCell align="right">
+                      {row.number && (
+                        <button
+                          onClick={() =>
+                            navigate(`/View-Marks/${row.number}`, {
+                              state: {
+                                description: row.description,
+                                id: row.number,
+                              },
+                            })
+                          }
+                        >
+                          View Marks
+                        </button>
+                      )}
+                    </TableCell>
+                    <TableCell align="right">
+                      {row.number && (
+                        <IconButton>
+                          <DeleteIcon
+                            onClick={() => handleDelete(row.number)}
+                          />
+                        </IconButton>
+                      )}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </>
+      ) : (
+        <>
+          <Typography component="h1" variant="h5">
+            No Past Uploaded Files!!
+          </Typography>
+        </>
+      )}
       {error && (
         <Snackbar open={true} autoHideDuration={2000}>
           <Alert severity="error" sx={{ width: "100%" }}>

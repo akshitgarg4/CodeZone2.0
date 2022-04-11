@@ -48,27 +48,27 @@ export default function ViewData(props){
 	const location = useLocation();
 	const [error, setError] = useState("");
 	const [success, setSuccess] = useState("");
-	const [evaluators, setEvaluators] = useState(['Akshit', 'Gagan', 'Shayan']);
+	const [evaluators, setEvaluators] = useState(['Akshit Garg', 'Gaganpreet Khurana', 'Shayan Yaseen']);
 	const [finalEvaluators, setFinalEvaluators] = useState([]);
 	const {data, description, id} = location?.state;
-	useEffect(() => {
-		// api to get the list of all the evaluators mapped in the backend
-		console.log(id)
-		fetch(`/data/evaluators_list/${id}`, {
-			headers: {
-				"Content-Type": "application/x-www-form-urlencoded",
-				Authorization: `Bearer ${localStorage.getItem("CodeZone2_Token")}`,
-			},
-		})
-			.then((response) => response.json())
-			.then((data) => {
-				console.log(data, "WW");
-				if(data?.success){
-					console.log(data, "RR");
-					setEvaluators(data?.data);
-				}
-			});
-	}, [])
+	// useEffect(() => {
+	// 	// api to get the list of all the evaluators mapped in the backend
+	// 	console.log(id)
+	// 	fetch(`/data/evaluators_list/${id}`, {
+	// 		headers: {
+	// 			"Content-Type": "application/x-www-form-urlencoded",
+	// 			Authorization: `Bearer ${localStorage.getItem("CodeZone2_Token")}`,
+	// 		},
+	// 	})
+	// 		.then((response) => response.json())
+	// 		.then((data) => {
+	// 			console.log(data, "WW");
+	// 			if(data?.success){
+	// 				console.log(data, "RR");
+	// 				setEvaluators(data?.data);
+	// 			}
+	// 		});
+	// }, [])
 	const handleSend = (id) => {
 		console.log("send called", id);
 		//on click of this send email with mentor page to all the mentors present on that excell sheet
@@ -103,6 +103,23 @@ export default function ViewData(props){
 	const handleSend2 = (id) => {
 		console.log("send called", id, finalEvaluators);
 		//on click of this send email with mentor page to all the mentors present on that excell sheet
+		fetch(`/data/add_evaluators/${id}`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${localStorage.getItem("CodeZone2_Token")}`,
+			},
+			body: JSON.stringify({
+				evaluators: finalEvaluators,
+			}),
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				console.log("@@@@@@@@@@@@@@@@@@@@@",data);
+			})
+			.catch((err) => {
+				console.log("@@@@@@@@@@@@@@@@@@@@@",err);
+			});
 		fetch(`/data/send_email_to_evaluators/${id}`, {
 			method: "POST",
 			headers: {
@@ -247,7 +264,7 @@ export default function ViewData(props){
 				<SendIcon/>
 				&nbsp; Share Link with Mentors
 			</IconButton>
-			{evaluators.length && <><Box sx={{display: 'flex'}}>
+			{evaluators?.length && <><Box sx={{display: 'flex'}}>
 				<FormControl sx={{m: 3}} component="fieldset" variant="standard">
 					<FormLabel component="legend">Mark Evaluators</FormLabel>
 					<FormGroup>
