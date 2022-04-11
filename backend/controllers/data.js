@@ -27,17 +27,43 @@ module.exports.save = async function(req, res){
 			student_5: DataFromExcel[index]["Student E"],
 			student_5_SID: DataFromExcel[index]["SID E"],
 			mentor: await User.findOne({name: DataFromExcel[index]["Faculty Mentor"]}),
-			midSemesterMarks: {},
-			endSemesterMarks: {},
-			totalMarks: {},
+			
+			midSemesterMarks: {
+				mentor: {
+					presentation: 0,
+					viva: 0,
+					implementation: 0,
+					interaction: 0,
+					remarks: ["", "", "", "", ""],
+				}
+			},
+			endSemesterMarks: {
+				mentor: {
+					presentation: 0,
+					viva: 0,
+					implementation: 0,
+					interaction: 0,
+					remarks: ["", "", "", "", ""],
+				}
+			},
+			totalMarks: {
+				midSemester: 0,
+				endSemester: 0,
+				totalMarks: 0,
+			},
 		})
+		
 		newGroup = await newGroup.save();
+		
 		newData.data.push(newGroup);
 	}
 	newData = await newData.save();
 	if(newData){
 		return res.status(201).json({
-			data: newData,
+			data: await data.findById(newData._id)
+				.populate(
+					"coordinator evaluators data",
+					"name GroupNumber student_1 student_1_SID student_2 student_2_SID student_3 student_3_SID student_4 student_4_SID student_5 student_5_SID mentor mentor_name"),
 			success: true,
 			message: "Upload Successful",
 		});
@@ -48,10 +74,15 @@ module.exports.save = async function(req, res){
 			message: "Upload Unsuccessful",
 		});
 	}
-};
+}
+
 module.exports.fetch = async function(req, res){
 	let previousData = [];
-	let allData = await data.find({coordinator: req.user._id});
+	let allData = await data.find({coordinator: req.user._id})
+		.populate(
+			"coordinator evaluators data",
+			"name GroupNumber student_1 student_1_SID student_2 student_2_SID student_3 student_3_SID student_4 student_4_SID student_5 student_5_SID mentor mentor_name")
+	;
 	for(let index = 0; index < allData.length; index++){
 		let currentData = {
 			number: allData[index]._id,
@@ -61,6 +92,7 @@ module.exports.fetch = async function(req, res){
 			timeUploaded: allData[index].updatedAt,
 			data: allData[index].data,
 		};
+		
 		previousData.push(currentData);
 	}
 	return res.status(200).json({
@@ -168,7 +200,17 @@ module.exports.addEvaluators = async function(req, res){
 	for(let index = 0; index < req.body.evaluators.length; index++){
 		let evaluator = await User.findOne({name: req.body.evaluators[index]});
 		record.evaluators.push(evaluator);
-		
+		record.midSemesterMarks[evaluator._id] = {
+			presentation: 0,
+			viva: 0,
+			implementation: 0
+		}
+		record.endSemesterMarks[evaluator._id] = {
+			presentation: 0,
+			viva: 0,
+			implementation: 0,
+			report: 0,
+		}
 	}
 	record = await record.save();
 	if( !record){
