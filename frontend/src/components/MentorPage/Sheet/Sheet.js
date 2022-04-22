@@ -11,44 +11,113 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { Box } from "@mui/system";
 
-const InputGridHeaders = ["Name", "Sid"];
+const InputGridHeaders = ["Name", "Sid", "Presentation","Implementation","Viva"];
 
 class Sheet extends React.Component {
   constructor(props) {
     super(props);
+    //Need to fetch data from backend here and poplulate the first two columns name and sid's
     this.state = {
-      grid: [
-        [{ value: "Shayan" }, { value: "18103033" }],
-        [{ value: "Gagan" }, { value: "18103032" }],
-        [{ value: "Akshit" }, { value: "18103042" }],
+      gridMid: [
+        [
+          { value: "Shayan" },
+          { value: "18103033" },
+          { value: "0" },
+          { value: "0" },
+          { value: "0" },
+        ],
+        [
+          { value: "Gagan" },
+          { value: "18103032" },
+          { value: "0" },
+          { value: "0" },
+          { value: "0" },
+        ],
+        [
+          { value: "Akshit" },
+          { value: "18103042" },
+          { value: "0" },
+          { value: "0" },
+          { value: "0" },
+        ],
+      ],
+      gridEnd: [
+        [
+          { value: "Shayan" },
+          { value: "18103033" },
+          { value: "0" },
+          { value: "0" },
+          { value: "0" },
+        ],
+        [
+          { value: "Gagan" },
+          { value: "18103032" },
+          { value: "0" },
+          { value: "0" },
+          { value: "0" },
+        ],
+        [
+          { value: "Akshit" },
+          { value: "18103042" },
+          { value: "0" },
+          { value: "0" },
+          { value: "0" },
+        ],
       ],
     };
   }
 
-  onCellsChanged = (changes) => {
+  onCellsChangedMid = (changes) => {
     // console.log(changes);
-    const grid = this.state.grid.map((row) => [...row]);
+    const gridMid = this.state.gridMid.map((row) => [...row]);
     changes.forEach(({ cell, row, col, value }) => {
-      grid[row][col] = { ...grid[row][col], value };
+      gridMid[row][col] = { ...gridMid[row][col], value };
     });
-    this.setState({ grid: grid });
+    this.setState({ gridMid: gridMid });
+  };
+
+  onCellsChangedEnd = (changes) => {
+    // console.log(changes);
+    const gridEnd = this.state.gridEnd.map((row) => [...row]);
+    changes.forEach(({ cell, row, col, value }) => {
+      gridEnd[row][col] = { ...gridEnd[row][col], value };
+    });
+    this.setState({ gridEnd: gridEnd });
   };
 
   render() {
     return (
-      <Box>
-        <h1>Mentor Group Sheet</h1>
+      <Box m ={2}>
+        <h1>Mid-Semester Evaluation</h1>
         <ReactDataSheet
-          data={this.state.grid}
+          data={this.state.gridMid}
           valueRenderer={(cell) => cell.value}
-          onCellsChanged={(e) => this.onCellsChanged(e)}
+          onCellsChanged={(e) => this.onCellsChangedMid(e)}
           sheetRenderer={(props) => (
             <Table className={props.className + " my-awesome-extra-class"}>
               <TableHead>
                 <TableRow>
-                    {InputGridHeaders.map((col, index) => (
-                      <TableCell key={index}>{col}</TableCell>
-                    ))}
+                  {InputGridHeaders.map((col, index) => (
+                    <TableCell key={index}>{col}</TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>{props.children}</TableBody>
+            </Table>
+          )}
+        />
+        <h1>End-Semester Evaluation</h1>
+        <ReactDataSheet
+          data={this.state.gridEnd}
+          valueRenderer={(cell) => cell.value}
+          onCellsChanged={(e) => this.onCellsChangedEnd(e)}
+          sheetRenderer={(props) => (
+            <Table className={props.className + " my-awesome-extra-class"}>
+              <TableHead>
+                <TableRow>
+                  {InputGridHeaders.map((col, index) => (
+                    <TableCell key={index}>{col}</TableCell>
+                  ))}
                 </TableRow>
               </TableHead>
               <TableBody>{props.children}</TableBody>

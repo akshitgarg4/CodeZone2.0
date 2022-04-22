@@ -3,17 +3,24 @@ import React from "react";
 import { connect } from "react-redux";
 import Sheet from "./Sheet/Sheet";
 import Todo from "./Todo/Todo";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import { InputBase } from "@mui/material";
 
 const MentorPage = (props) => {
   console.log(props.auth.inProgress);
   return (
     <Grid container>
-      <Grid item xs={7} m={1}>
-          <Sheet />
-      </Grid>
-      <Grid item xs={4} m={4}>
-        <Todo />
-      </Grid>
+      <Box
+        m={3}
+        sx={{
+          width: "100%",
+          maxWidth: "100%",
+        }}
+      >
+        <TextField fullWidth label="Group No" id="fullWidth" />
+      </Box>
+      <Sheet />
     </Grid>
   );
 }
