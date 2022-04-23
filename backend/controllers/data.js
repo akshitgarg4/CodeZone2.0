@@ -388,3 +388,77 @@ module.exports.fetchStudentMarks = async function(req, res){
 		message: "MArks Fetched",
 	});
 }
+
+module.exports.fetchStudentMarksMentor = async function(req, res){
+	let record = await data.findById(sanitizer.escape(req.params.record_id));
+	if( !record){
+		return res.status(404).json({
+			data: null,
+			success: false,
+			message: "Record not found",
+		});
+	}
+	let groupsInData = record.data;
+	let studentMarks = [];
+	for(let index = 0; index < groupsInData.length; index++){
+		let group = await groups.findById(groupsInData[index]);
+		if(group.mentor_name !== req.user.name){
+			continue;
+		}
+		let currentGroup = {
+			groupID: group._id,
+			GroupNumber: group.groupNumber,
+			mentor: group.mentor_name,
+			students: [],
+			groupRemarks: group.groupRemarks,
+		};
+		for(let studentNumber = 0; studentNumber < 5; studentNumber++){
+			let currentStudent = {
+				
+				studentID: studentNumber,
+				name: group.students[studentNumber],
+				sid: group.SID[studentNumber],
+				grade: group.grade[studentNumber],
+				midSemesterMarks: {},
+				endSemesterMarks: {},
+				totalMarks: {
+					endSemester: group.totalMarks.endSemester[studentNumber],
+					midSemester: group.totalMarks.midSemester[studentNumber],
+					totalMarks: group.totalMarks.totalMarks[studentNumber],
+					
+				},
+			}
+			for(let [faculty, marks] of Object.entries(group.midSemesterMarks)){
+				if(faculty === "mentor"){
+					currentStudent.midSemesterMarks["mentor"] = {
+						presentation: marks.presentation[studentNumber],
+						viva: marks.viva[studentNumber],
+						implementation: marks.implementation[studentNumber],
+						interaction: marks.interaction[studentNumber],
+						remarks: marks.remarks[studentNumber]
+					};
+				}
+			}
+			for(let [faculty, marks] of Object.entries(group.endSemesterMarks)){
+				if(faculty === "mentor"){
+					currentStudent.endSemesterMarks["mentor"] = {
+						presentation: marks.presentation[studentNumber],
+						viva: marks.viva[studentNumber],
+						implementation: marks.implementation[studentNumber],
+						interaction: marks.interaction[studentNumber],
+						remarks: marks.remarks[studentNumber]
+					};
+				}
+			}
+			currentGroup.students.push(currentStudent);
+		}
+		
+		studentMarks.push(currentGroup);
+	}
+	
+	return res.status(200).json({
+		data: studentMarks,
+		success: true,
+		message: "MArks Fetched for mentor",
+	});
+}
