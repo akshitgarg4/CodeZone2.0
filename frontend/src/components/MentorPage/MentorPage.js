@@ -14,8 +14,10 @@ const MentorPage = (props) => {
 	const {recordId} = useParams();
 	useEffect(() => {
 		if(groupNumber !== 0 && studentsData.length > 0 && groupID !== ""){
+			console.log(studentsData, "EEE")
 			setDataFetched(true);
 		} else{
+			console.log(studentsData, "QQ")
 			setDataFetched(false);
 		}
 	}, [groupNumber, studentsData, groupID])

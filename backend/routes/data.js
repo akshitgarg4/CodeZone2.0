@@ -12,5 +12,7 @@ router.get('/evaluators_list', auth.authenticateToken, data.fetchEvaluatorsList)
 router.post('/send_email_to_evaluators/:record_id', auth.authenticateToken, data.sendLinkEvaluators);
 router.get('/existing_marks/:record_id', auth.authenticateToken, data.fetchStudentMarks);
 router.get('/mentor/marksFetch/:record_id', auth.authenticateToken, data.fetchStudentMarksMentor);
+router.post('/mentor/marksSave/:group_id', auth.authenticateToken, data.saveStudentMarksMentor);
+
 
 module.exports = router;
