@@ -7,10 +7,18 @@ import TextField from "@mui/material/TextField";
 import {useParams} from "react-router-dom";
 
 const MentorPage = (props) => {
-	console.log(props.auth.inProgress, props);
-	const [midSemesterMarks, setMidSemesterMarks] = useState([]);
-	const [endSemesterMarks, setEndSemesterMarks] = useState([]);
+	const [groupNumber, setGroupNumber] = useState(0);
+	const [groupID, setGroupID] = useState("");
+	const [dataFetched, setDataFetched] = useState(false);
+	const [studentsData, setStudentsData] = useState([]);
 	const {recordId} = useParams();
+	useEffect(() => {
+		if(groupNumber !== 0 && studentsData.length > 0 && groupID !== ""){
+			setDataFetched(true);
+		} else{
+			setDataFetched(false);
+		}
+	}, [groupNumber, studentsData, groupID])
 	useEffect(() => {
 		//Need to fetch data from backend here and poplulate the first two columns name and sid's
 		console.log(recordId);
@@ -21,11 +29,13 @@ const MentorPage = (props) => {
 		})
 			.then((response) => response.json())
 			.then((data) => {
-				console.log(data);
 				if(data?.success){
-					//njvrk
-					console.log(data.data, "RR");
+					setGroupNumber(data.data[0].GroupNumber);
+					setGroupID(data.data[0].groupID);
 					
+					setStudentsData(data.data[0].students);
+					console.log(data.data, "RR");
+					console.log(data.data[0], data.data[0].GroupNumber)
 				}
 			})
 			.catch((err) => {
@@ -44,7 +54,7 @@ const MentorPage = (props) => {
 			>
 				<TextField fullWidth label="Group No" id="fullWidth"/>
 			</Box>
-			<Sheet midSemester={midSemesterMarks} endSemester={endSemesterMarks}/>
+			{dataFetched && <Sheet studentsData={studentsData} groupNumber={groupNumber} groupID={groupID}/>}
 		</Grid>
 	);
 }

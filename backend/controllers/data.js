@@ -424,7 +424,7 @@ module.exports.fetchStudentMarksMentor = async function(req, res) {
         }
         let currentGroup = {
             groupID: group._id,
-            GroupNumber: group.groupNumber,
+            GroupNumber: group.GroupNumber,
             mentor: group.mentor_name,
             students: [],
             groupRemarks: group.groupRemarks,

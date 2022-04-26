@@ -15,68 +15,37 @@ const InputGridHeaders = ["Name", "Sid", "Presentation", "Viva", "Implementation
 
 class Sheet extends React.Component{
   constructor(props){
-    super(props);
-    console.log(this.props);
-    this.state = {
-      gridMid: [
-        [
-          {value: "Shayan"},
-          {value: "18103033"},
-          {value: "0"},
-          {value: "0"},
-          {value: "0"},
-          {value: "0"},
-          {value: "0"},
-        ],
-        [
-          {value: "Gagan"},
-          {value: "18103032"},
-          {value: "0"},
-          {value: "0"},
-          {value: "0"},
-          {value: "0"},
-          {value: "0"},
-        ],
-        [
-          {value: "Akshit"},
-          {value: "18103042"},
-          {value: "0"},
-          {value: "0"},
-          {value: "0"},
-          {value: "0"},
-          {value: "0"},
-        ],
-      ],
-      gridEnd: [
-        [
-          {value: "Shayan"},
-          {value: "18103033"},
-          {value: "0"},
-          {value: "0"},
-          {value: "0"},
-          {value: "0"},
-          {value: "0"},
-        ],
-        [
-          {value: "Gagan"},
-          {value: "18103032"},
-          {value: "0"},
-          {value: "0"},
-          {value: "0"},
-          {value: "0"},
-          {value: "0"},
-        ],
-        [
-          {value: "Akshit"},
-          {value: "18103042"},
-          {value: "0"},
-          {value: "0"},
-          {value: "0"},
-          {value: "0"},
-          {value: "0"},
-        ],
-      ],
-    };
+      super(props);
+      console.log(this.props, "RRRR");
+      let midSemesterMarks = [];
+      let endSemesterMarks = [];
+    
+      for(let studentsIndex = 0; studentsIndex < this.props.studentsData.length; studentsIndex++){
+          let currentMid = [];
+          let currentEnd = [];
+          currentMid.push({value: this.props.studentsData[studentsIndex].name});
+          currentMid.push({value: this.props.studentsData[studentsIndex].sid});
+          currentMid.push({value: this.props.studentsData[studentsIndex].midSemesterMarks.mentor.presentation});
+          currentMid.push({value: this.props.studentsData[studentsIndex].midSemesterMarks.mentor.viva});
+          currentMid.push({value: this.props.studentsData[studentsIndex].midSemesterMarks.mentor.implementation});
+          currentMid.push({value: this.props.studentsData[studentsIndex].midSemesterMarks.mentor.interaction});
+          currentMid.push({value: this.props.studentsData[studentsIndex].midSemesterMarks.mentor.remarks});
+          midSemesterMarks.push(currentMid)
+        
+          currentEnd.push({value: this.props.studentsData[studentsIndex].name});
+          currentEnd.push({value: this.props.studentsData[studentsIndex].sid});
+          currentEnd.push({value: this.props.studentsData[studentsIndex].endSemesterMarks.mentor.presentation});
+          currentEnd.push({value: this.props.studentsData[studentsIndex].endSemesterMarks.mentor.viva});
+          currentEnd.push({value: this.props.studentsData[studentsIndex].endSemesterMarks.mentor.implementation});
+          currentEnd.push({value: this.props.studentsData[studentsIndex].endSemesterMarks.mentor.interaction});
+          currentEnd.push({value: this.props.studentsData[studentsIndex].endSemesterMarks.mentor.remarks});
+          endSemesterMarks.push(currentEnd);
+      }
+      this.state = {
+          gridMid: midSemesterMarks,
+          gridEnd: endSemesterMarks,
+      };
+      console.log(this.state);
   }
   
   onCellsChangedMid = (changes) => {
