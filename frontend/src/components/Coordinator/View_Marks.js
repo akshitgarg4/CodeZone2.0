@@ -3,6 +3,8 @@ import {useLocation} from "react-router-dom";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import CircularProgress from "@mui/material/CircularProgress";
+import Table2 from "./Table2";
+
 
 export default function ViewMarks(){
 	const location = useLocation();
@@ -71,6 +73,7 @@ export default function ViewMarks(){
 				console.log(data);
 				if(data?.success){
 					setExistingMarks(data?.data);
+					console.log("Marks",data);
 					setPlayCircle(false);
 					setSuccess("Marks Fetched");
 					setTimeout(() => {
@@ -112,6 +115,7 @@ export default function ViewMarks(){
 					</Alert>
 				</Snackbar>
 			)}
+			{!playCircle && <Table2 />}
 		</>
 	);
 }

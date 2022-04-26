@@ -1,0 +1,117 @@
+
+[{
+    "groupID": "625405c2e151069c1374b7e6",
+    "studentID": 0,
+    "GroupNumber": 1,
+    "mentor": "",
+    "name": "A",
+    "sid": 18103001,
+    "groupRemarks": "",
+    "midSemesterMarks": {
+        "mentor": {
+            "presentation": 0,
+            "viva": 0,
+            "implementation": 0,
+            "interaction": 0,
+            "remarks": ""
+        },
+        "evaluator_1": {
+            "evaluatorID": "62540442248f66df175e8e2f",
+            "presentation": 2,
+            "viva": 0,
+            "implementation": 0
+        },
+        "evaluator_2": {
+            "evaluatorID": "62540442248f66df175e8e37",
+            "presentation": 0,
+            "viva": 0,
+            "implementation": 0
+        }
+    },
+    "endSemesterMarks": {
+        "mentor": {
+            "presentation": 0,
+            "viva": 0,
+            "implementation": 0,
+            "interaction": 0,
+            "remarks": ""
+        },
+        "evaluator_1": {
+            "evaluatorID": "62540442248f66df175e8e2f",
+            "presentation": 0,
+            "viva": 0,
+            "implementation": 0,
+            "report": 0
+        },
+        "evaluator_2": {
+            "evaluatorID": "62540442248f66df175e8e37",
+            "presentation": 0,
+            "viva": 0,
+            "implementation": 0,
+            "report": 0
+        }
+    },
+    "totalMarks": {
+        "endSemester": 0,
+        "midSemester": 0,
+        "totalMarks": 0
+    }
+},
+{
+    "groupID": "625405c2e151069c1374b7e6",
+    "studentID": 0,
+    "GroupNumber": 1,
+    "mentor": "",
+    "name": "A",
+    "sid": 18103001,
+    "groupRemarks": "",
+    "midSemesterMarks": {
+        "mentor": {
+            "presentation": 0,
+            "viva": 0,
+            "implementation": 0,
+            "interaction": 0,
+            "remarks": ""
+        },
+        "evaluator_1": {
+            "evaluatorID": "62540442248f66df175e8e2f",
+            "presentation": 2,
+            "viva": 0,
+            "implementation": 0
+        },
+        "evaluator_2": {
+            "evaluatorID": "62540442248f66df175e8e37",
+            "presentation": 0,
+            "viva": 0,
+            "implementation": 0
+        }
+    },
+    "endSemesterMarks": {
+        "mentor": {
+            "presentation": 0,
+            "viva": 0,
+            "implementation": 0,
+            "interaction": 0,
+            "remarks": ""
+        },
+        "evaluator_1": {
+            "evaluatorID": "62540442248f66df175e8e2f",
+            "presentation": 0,
+            "viva": 0,
+            "implementation": 0,
+            "report": 0
+        },
+        "evaluator_2": {
+            "evaluatorID": "62540442248f66df175e8e37",
+            "presentation": 0,
+            "viva": 0,
+            "implementation": 0,
+            "report": 0
+        }
+    },
+    "totalMarks": {
+        "endSemester": 0,
+        "midSemester": 0,
+        "totalMarks": 0
+    }
+}]
