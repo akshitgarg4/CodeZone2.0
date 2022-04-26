@@ -44,11 +44,68 @@ const StyledTableRow = styled(TableRow)(({theme}) => ({
 	},
 }));
 
+// {
+// 	"groupID": "625405c2e151069c1374b7e6",
+// 	"studentID": 0,
+// 	"mentor": "",
+// 	"name": "A",
+// 	"sid": 18103001,
+// 	"groupRemarks": "",
+// 	"midSemesterMarks": {
+// 		"mentor": {
+// 			"presentation": 0,
+// 			"viva": 0,
+// 			"implementation": 0,
+// 			"interaction": 0,
+// 			"remarks": ""
+// 		},
+// 		"Gaganpreet Khurana": {
+// 			"evaluatorID": "62540442248f66df175e8e2f",
+// 			"presentation": 0,
+// 			"viva": 0,
+// 			"implementation": 0
+// 		},
+// 		"Akshit Garg": {
+// 			"evaluatorID": "62540442248f66df175e8e37",
+// 			"presentation": 0,
+// 			"viva": 0,
+// 			"implementation": 0
+// 		}
+// 	},
+// 	"endSemesterMarks": {
+// 		"mentor": {
+// 			"presentation": 0,
+// 			"viva": 0,
+// 			"implementation": 0,
+// 			"interaction": 0,
+// 			"remarks": ""
+// 		},
+// 		"Gaganpreet Khurana": {
+// 			"evaluatorID": "62540442248f66df175e8e2f",
+// 			"presentation": 0,
+// 			"viva": 0,
+// 			"implementation": 0,
+// 			"report": 0
+// 		},
+// 		"Akshit Garg": {
+// 			"evaluatorID": "62540442248f66df175e8e37",
+// 			"presentation": 0,
+// 			"viva": 0,
+// 			"implementation": 0,
+// 			"report": 0
+// 		}
+// 	},
+// 	"totalMarks": {
+// 		"endSemester": 0,
+// 		"midSemester": 0,
+// 		"totalMarks": 0
+// 	}
+// }
 export default function ViewData(props){
 	const location = useLocation();
 	const [error, setError] = useState("");
 	const [success, setSuccess] = useState("");
-	const [evaluators, setEvaluators] = useState(['Akshit Garg', 'Gaganpreet Khurana', 'Shayan Yaseen']);
+	const [evaluators, setEvaluators] = useState([]);
 	const [finalEvaluators, setFinalEvaluators] = useState([]);
 	const {data, description, id} = location?.state;
 	useEffect(() => {
