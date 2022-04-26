@@ -323,7 +323,7 @@ module.exports.fetchStudentMarks = async function(req, res){
 			let currentStudent = {
 				groupID: group._id,
 				studentID: studentNumber,
-				GroupNumber: group.groupNumber,
+				GroupNumber: group.GroupNumber,
 				mentor: group.mentor_name,
 				name: group.students[studentNumber],
 				sid: group.SID[studentNumber],
