@@ -19,11 +19,6 @@ export default function ExistingFiles(props) {
   const [success, setSuccess] = useState("");
   const [existingData, setExistingData] = useState([]);
   const handleDelete = (doc_id) => {
-    // console.log("DOC DELETED", doc_id);
-    //post doc_id to be deleted
-    //response send all the documents of that user if success
-    //send the docs in recent order doc that was uploaded recently needs to be on index 0
-
     fetch(`/data/delete_record/${doc_id}`, {
       method: "DELETE",
       headers: {
