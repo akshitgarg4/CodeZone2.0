@@ -4,11 +4,11 @@ module.exports.SECRET = {
 };
 
 module.exports.SECRET_MAIL = {
-	CLIENT_ID: '251136267954-aq51npde2d3ghc6in7j2nvgp6kdv36gv.apps.googleusercontent.com',
-	CLIENT_SECRET_KEY: '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',
+	CLIENT_ID: '251136267954-40vk8lqb8pe3vqjbeap4ors2ung1g85j.apps.googleusercontent.com',
+	CLIENT_SECRET_KEY: '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',
 	EMAIL: 'codezonemajorproject@gmail.com',
 	FROM: "no-reply@codezone.com",
-	ACCESS_TOKEN: ' ya29.A0ARrdaM_YVdNrqTLq-293ETd2I5V0mLHQzykELO-6Es1KfH3gPNHDNEYRXpFHcN5twuICZDjOlq2-h4h157YddC9dNs1TyOQ0HODj8OSuia7pttJDlRki5F59eaI3zBJbO6VaiYQIW7u12MpkaHZ7kan7_hkc',
-	REFRESH_TOKEN: '1//044vOz4mlDWhBCgYIARAAGAQSNwF-L9Ir5deZJq_AKvyuk_RhlfYPBPgP1kX2Q3zBrgBl5mGFmaAoGaUGlyp1puWBbYembfihAr8',
+	ACCESS_TOKEN: 'ya29.A0ARrdaM-jU3P-n9WkwhOs-W0ZZSejLoaNdBJxAPR3SgvW1EGTUNCAYvDyDt6tFNY_Ni0WNdVGIIH9h6ZgJhbY8yCgsgSV3G_5pY2fnijM0G4mQiaMHRq-TAa0PPXIQSRZLSe7ceblHfwjzfmRwku43pnvfVWj',
+	REFRESH_TOKEN: '1//04I6L722egyhSCgYIARAAGAQSNwF-L9IrzfuNSzuLBvE4oJnM4bOO2-rxwrK2U66oyP3bEaAaQWY-qBUidwRq6btQJLXEUvjVJcI',
 }
 
