@@ -393,7 +393,7 @@ module.exports.fetchStudentMarks = async function(req, res) {
 
     let reversedEvaluatorName = {};
     for (let [name, alias] of Object.entries(evaluatorNames)) {
-        reversedEvaluatorName[alias] = name;
+        reversedEvaluatorName[alias] = name === alias ? "" : name;
     }
     return res.status(200).json({
         data: {
