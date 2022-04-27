@@ -67,16 +67,16 @@ class Sheet extends React.Component{
 			remarks: [],
 		}
 		for(let studentsIndex = 0; studentsIndex < this.props.studentsData.length; studentsIndex++){
-			midSemesterMarks.presentation.push(this.state.gridMid[studentsIndex][2].value)
-			midSemesterMarks.viva.push(this.state.gridMid[studentsIndex][3].value)
-			midSemesterMarks.implementation.push(this.state.gridMid[studentsIndex][4].value)
-			midSemesterMarks.interaction.push(this.state.gridMid[studentsIndex][5].value)
+			midSemesterMarks.presentation.push(parseFloat(this.state.gridMid[studentsIndex][2].value))
+			midSemesterMarks.viva.push(parseFloat(this.state.gridMid[studentsIndex][3].value))
+			midSemesterMarks.implementation.push(parseFloat(this.state.gridMid[studentsIndex][4].value))
+			midSemesterMarks.interaction.push(parseFloat(this.state.gridMid[studentsIndex][5].value))
 			midSemesterMarks.remarks.push(this.state.gridMid[studentsIndex][6].value)
 			
-			endSemesterMarks.presentation.push(this.state.gridEnd[studentsIndex][2].value)
-			endSemesterMarks.viva.push(this.state.gridEnd[studentsIndex][3].value)
-			endSemesterMarks.implementation.push(this.state.gridEnd[studentsIndex][4].value)
-			endSemesterMarks.interaction.push(this.state.gridEnd[studentsIndex][5].value)
+			endSemesterMarks.presentation.push(parseFloat(this.state.gridEnd[studentsIndex][2].value))
+			endSemesterMarks.viva.push(parseFloat(this.state.gridEnd[studentsIndex][3].value))
+			endSemesterMarks.implementation.push(parseFloat(this.state.gridEnd[studentsIndex][4].value))
+			endSemesterMarks.interaction.push(parseFloat(this.state.gridEnd[studentsIndex][5].value))
 			endSemesterMarks.remarks.push(this.state.gridEnd[studentsIndex][6].value)
 			
 		}

@@ -27,5 +27,34 @@ const groupsSchema = new mongoose.Schema(
 	{timestamps: true}
 );
 
+groupsSchema.pre('save', function(next){
+	let currentGroup = this;
+	for(let index = 0; index < 5; index++){
+		currentGroup.totalMarks.midSemester[index] = 0;
+		
+		for(let [evaluator, parameters] of Object.entries(currentGroup.midSemesterMarks)){
+			for(let [parameter, marks] of Object.entries(parameters)){
+				if(parameter === "remarks"){
+					continue;
+				}
+				currentGroup.totalMarks.midSemester[index] += marks[index];
+			}
+		}
+		currentGroup.totalMarks.endSemester[index] = 0;
+		for(let [evaluator, parameters] of Object.entries(currentGroup.endSemesterMarks)){
+			for(let [parameter, marks] of Object.entries(parameters)){
+				if(parameter === "remarks"){
+					continue;
+				}
+				currentGroup.totalMarks.endSemester[index] += marks[index];
+			}
+		}
+		currentGroup.totalMarks.totalMarks[index] = parseFloat(currentGroup.totalMarks.midSemester[index]) + parseFloat(currentGroup.totalMarks.endSemester[index]);
+		
+	}
+	currentGroup.markModified("totalMarks");
+	
+	next();
+});
 const data = mongoose.model("group", groupsSchema);
 module.exports = data;
