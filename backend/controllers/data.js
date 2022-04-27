@@ -171,9 +171,10 @@ module.exports.sendLinkMentors = async function(req, res){
 	console.log("Mail Sent To:")
 	let results = [];
 	let subject = "Major Project Evaluation - Evaluator";
-	let text = "Link for entering marks:\n" + "http://localhost:3000/" + "/mentor/" + record._id;
+	
+	let text = "Link for entering marks:\n" + "http://localhost:3000/mentor/" + sanitizer.escape(req.params.record_id);
 	for(const [teacherEmail, teacherID] of Object.entries(mentors)){
-		results.push(await sendMail(teacherEmail, subject, text + teacherID + "\nCoordinator\n"));
+		results.push(await sendMail(teacherEmail, subject, text + "\nCoordinator\n"));
 		console.log(teacherEmail);
 	}
 	console.log("All Mails Sent")
@@ -284,9 +285,9 @@ module.exports.sendLinkEvaluators = async function(req, res){
 	console.log("Mail Sent To:")
 	let results = [];
 	let subject = "Major Project Evaluation";
-	let text = "Link for entering marks:\n" + "http://localhost:3000/" + "/evaluator/" + record._id;
+	let text = "Link for entering marks:\n" + "http://localhost:3000/evaluator/" + sanitizer.escape(req.params.record_id);
 	for(const [teacherEmail, teacherID] of Object.entries(recipients)){
-		results.push(await sendMail(teacherEmail, subject, text + teacherID + "\nCoordinator\n"));
+		results.push(await sendMail(teacherEmail, subject, text + "\nCoordinator\n"));
 		console.log(teacherEmail);
 	}
 	console.log("All Mails Sent")
@@ -482,7 +483,7 @@ module.exports.fetchStudentMarksMentor = async function(req, res){
 
 
 module.exports.saveStudentMarksMentor = async function(req, res){
-	console.log("RR")
+	
 	let group = await groups.findById(sanitizer.escape(req.params.group_id));
 	if( !group){
 		return res.status(404).json({
@@ -498,12 +499,13 @@ module.exports.saveStudentMarksMentor = async function(req, res){
 			message: "Not mentor of this group",
 		});
 	}
-	group.mentor.midSemesterMarks = req.body.midSemesterMarks;
-	group.mentor.endSemesterMarks = req.body.endSemesterMarks;
+	group.midSemesterMarks.mentor = req.body.midSemesterMarks;
+	group.endSemesterMarks.mentor = req.body.endSemesterMarks;
 	
 	await group.markModified('endSemesterMarks');
 	await group.markModified('midSemesterMarks');
 	group = await group.save();
+	
 	return res.status(200).json({
 		data: group,
 		success: true,

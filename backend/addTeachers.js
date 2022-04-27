@@ -1,8 +1,7 @@
 const User = require("./models/user")
 
 const teachers = {
-	"Gaganpreet Khurana": "gaganpreetsinghkhurana.be18cse@pec.edu.in",
-	"Shayan Yaseen": "shayanyaseen.be18cse@pec.edu.in",
+	"be18103032 Gaganpreet Singh Khurana": "gaganpreetsinghkhurana.be18cse@pec.edu.in",
 	"Akshit Garg": "gargakshit.be18cse@pec.edu.in",
 }
 
