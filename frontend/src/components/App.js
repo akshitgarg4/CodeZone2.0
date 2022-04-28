@@ -14,6 +14,7 @@ import { Paper } from "@mui/material";
 import jwt_decode from "jwt-decode";
 import { authenticateUser } from "../actions/auth";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import EvaluatorPage from "./Evaluator/EvaluatorPage";
 
 class App extends React.Component {
   componentDidMount() {
@@ -39,6 +40,9 @@ class App extends React.Component {
             )}
             {auth.isLoggedIn && (
               <Route path="/mentor/:recordId" element={<Mentor />} />
+            )}
+            {auth.isLoggedIn && (
+              <Route path="/evaluator/:recordId" element={<EvaluatorPage />} />
             )}
             {auth.isLoggedIn && (
               <Route path="/View-Data/:dataId" element={<ViewData />} />

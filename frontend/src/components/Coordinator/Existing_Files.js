@@ -72,6 +72,7 @@ export default function ExistingFiles(props) {
       .then((response) => response.json())
       .then((data) => {
         if (data?.success) {
+          console.log("all_data",data?.data);
           setExistingData(data?.data);
         }
       });

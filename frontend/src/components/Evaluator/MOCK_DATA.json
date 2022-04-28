@@ -1,0 +1,209 @@
+{
+    "number": "6267ab1f251782878acbff8d",
+    "fileName": "MajorProject.xlsx",
+    "description": "MP2",
+    "dateUploaded": "2022-04-26T08:20:14.689Z",
+    "timeUploaded": "2022-04-26T08:20:14.689Z",
+    "data": [
+        {
+            "_id": "6267ab1f251782878acbff90",
+            "GroupNumber": 1,
+            "students": [
+                "A",
+                "B",
+                "C",
+                "D",
+                "E"
+            ],
+            "SID": [
+                18103001,
+                18103011,
+                18103021,
+                18103031,
+                18103041
+            ],
+            "mentor": "62540442248f66df175e8e37",
+            "mentor_name": "Akshit Garg"
+        },
+        {
+            "_id": "6267ab1f251782878acbff95",
+            "GroupNumber": 2,
+            "students": [
+                "A",
+                "B",
+                "C",
+                "D",
+                "E"
+            ],
+            "SID": [
+                18103002,
+                18103012,
+                18103022,
+                18103032,
+                18103042
+            ],
+            "mentor": "62540442248f66df175e8e37",
+            "mentor_name": "Akshit Garg"
+        },
+        {
+            "_id": "6267ab1f251782878acbff9a",
+            "GroupNumber": 3,
+            "students": [
+                "A",
+                "B",
+                "C",
+                "D",
+                "E"
+            ],
+            "SID": [
+                18103003,
+                18103013,
+                18103023,
+                18103033,
+                18103043
+            ],
+            "mentor": "62540442248f66df175e8e33",
+            "mentor_name": "Shayan Yaseen"
+        },
+        {
+            "_id": "6267ab1f251782878acbff9f",
+            "GroupNumber": 4,
+            "students": [
+                "A",
+                "B",
+                "C",
+                "D",
+                "E"
+            ],
+            "SID": [
+                18103004,
+                18103014,
+                18103024,
+                18103034,
+                18103044
+            ],
+            "mentor": "62540442248f66df175e8e37",
+            "mentor_name": "Akshit Garg"
+        },
+        {
+            "_id": "6267ab1f251782878acbffa4",
+            "GroupNumber": 5,
+            "students": [
+                "A",
+                "B",
+                "C",
+                "D",
+                "E"
+            ],
+            "SID": [
+                18103005,
+                18103015,
+                18103025,
+                18103035,
+                18103045
+            ],
+            "mentor": "62540442248f66df175e8e37",
+            "mentor_name": "Akshit Garg"
+        },
+        {
+            "_id": "6267ab1f251782878acbffa9",
+            "GroupNumber": 6,
+            "students": [
+                "A",
+                "B",
+                "C",
+                "D",
+                "E"
+            ],
+            "SID": [
+                18103006,
+                18103016,
+                18103026,
+                18103036,
+                18103046
+            ],
+            "mentor": "62540442248f66df175e8e37",
+            "mentor_name": "Akshit Garg"
+        },
+        {
+            "_id": "6267ab1f251782878acbffae",
+            "GroupNumber": 7,
+            "students": [
+                "A",
+                "B",
+                "C",
+                "D",
+                "E"
+            ],
+            "SID": [
+                18103007,
+                18103017,
+                18103027,
+                18103037,
+                18103047
+            ],
+            "mentor": "62540442248f66df175e8e37",
+            "mentor_name": "Akshit Garg"
+        },
+        {
+            "_id": "6267ab1f251782878acbffb3",
+            "GroupNumber": 8,
+            "students": [
+                "A",
+                "B",
+                "C",
+                "D",
+                "E"
+            ],
+            "SID": [
+                18103008,
+                18103018,
+                18103028,
+                18103038,
+                18103048
+            ],
+            "mentor": "62540442248f66df175e8e33",
+            "mentor_name": "Shayan Yaseen"
+        },
+        {
+            "_id": "6267ab1f251782878acbffb8",
+            "GroupNumber": 9,
+            "students": [
+                "A",
+                "B",
+                "C",
+                "D",
+                "E"
+            ],
+            "SID": [
+                18103009,
+                18103019,
+                18103029,
+                18103039,
+                18103049
+            ],
+            "mentor": "62540442248f66df175e8e37",
+            "mentor_name": "Akshit Garg"
+        },
+        {
+            "_id": "6267ab1f251782878acbffbd",
+            "GroupNumber": 10,
+            "students": [
+                "A",
+                "B",
+                "C",
+                "D",
+                "E"
+            ],
+            "SID": [
+                18103010,
+                18103020,
+                18103030,
+                18103040,
+                18103050
+            ],
+            "mentor": "62540442248f66df175e8e37",
+            "mentor_name": "Akshit Garg"
+        }
+    ]
+}
