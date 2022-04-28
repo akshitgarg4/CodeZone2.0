@@ -15,6 +15,7 @@ import jwt_decode from "jwt-decode";
 import { authenticateUser } from "../actions/auth";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import EvaluatorPage from "./Evaluator/EvaluatorPage";
+import AddMarks from "./Evaluator/AddMarks";
 
 class App extends React.Component {
   componentDidMount() {
@@ -49,6 +50,9 @@ class App extends React.Component {
             )}
             {auth.isLoggedIn && (
               <Route path="/View-Marks/:dataId" element={<ViewMarks />} />
+            )}
+            {auth.isLoggedIn && (
+              <Route path="/add-marks/:groupId" element={<AddMarks />} />
             )}
             <Route component={Page404} />
           </Routes>

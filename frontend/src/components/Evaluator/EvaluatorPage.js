@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import { styled } from "@mui/material/styles";
 import Alert from "@mui/material/Alert";
+import { useNavigate } from "react-router-dom";
 import Snackbar from "@mui/material/Snackbar";
 import CircularProgress from "@mui/material/CircularProgress";
 import Table from "@mui/material/Table";
@@ -35,6 +36,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   }));
 
 export default function EvaluatorPage() {
+  let navigate = useNavigate();
     const {recordId} = useParams();
     const [description,setDescription] = useState('');
     const [data,setData] = useState([]);
@@ -133,6 +135,7 @@ export default function EvaluatorPage() {
               <StyledTableCell align="right">SID E</StyledTableCell>
               <StyledTableCell align="right">Student E</StyledTableCell>
               <StyledTableCell align="right">Mentor</StyledTableCell>
+              <StyledTableCell align="right">Enter Marks</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -164,6 +167,17 @@ export default function EvaluatorPage() {
                 <StyledTableCell align="right">
                   {row["mentor_name"]}
                 </StyledTableCell>
+                <StyledTableCell align="right">
+                      {row.GroupNumber && (
+                        <button
+                          onClick={() =>
+                            navigate(`/add-marks/${row.GroupNumber}`)
+                          }
+                        >
+                          Enter Marks
+                        </button>
+                      )}
+                    </StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>
