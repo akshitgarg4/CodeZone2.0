@@ -171,7 +171,12 @@ export default function EvaluatorPage() {
                       {row.GroupNumber && (
                         <button
                           onClick={() =>
-                            navigate(`/add-marks/${row.GroupNumber}`)
+                            navigate(`/add-marks/${row.GroupNumber}`, {
+                                state: {
+                                  id: row.GroupNumber,
+                                  recordId,
+                                },
+                              })
                           }
                         >
                           Enter Marks
