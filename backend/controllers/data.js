@@ -536,7 +536,6 @@ module.exports.fetchAllStudentsEvaluator = async function(req, res) {
             select: "GroupNumber students SID mentor mentor_name",
         });
     return res.status(200).json({
-        // data: {
         data: responseData.data,
         success: true,
         number: sanitizer.escape(req.params.record_id),
@@ -544,8 +543,128 @@ module.exports.fetchAllStudentsEvaluator = async function(req, res) {
         description: record.description,
         dateUploaded: record.createdAt,
         timeUploaded: record.createdAt,
-        // },
-        // success: true,
-        message: "Marks Fetched",
+        message: "Data Fetched",
+    });
+}
+
+
+
+module.exports.fetchGroupEvaluator = async function(req, res) {
+    let record = await data.findById(sanitizer.escape(req.params.record_id));
+    if (!record) {
+        return res.status(404).json({
+            data: null,
+            success: false,
+            message: "Record not found",
+        });
+    }
+    if (!(record.evaluators.includes(req.user._id))) {
+        return res.status(403).json({
+            data: null,
+            success: false,
+            message: "Not allowed",
+        });
+    }
+    let groupID = record.data[sanitizer.escape(req.params.groupNumber) - 1];
+    if (!groupID) {
+        return res.status(404).json({
+            data: null,
+            success: false,
+            message: "Group not found",
+        });
+    }
+    let studentMarks = [];
+
+    let group = await groups.findById(groupID);
+
+    let currentGroup = {
+        groupID: group._id,
+        GroupNumber: group.GroupNumber,
+        mentor: group.mentor_name,
+        students: [],
+        groupRemarks: group.groupRemarks,
+    };
+    for (let studentNumber = 0; studentNumber < 5; studentNumber++) {
+        let currentStudent = {
+            studentID: studentNumber,
+            name: group.students[studentNumber],
+            sid: group.SID[studentNumber],
+            grade: group.grade[studentNumber],
+            midSemesterMarks: {},
+            endSemesterMarks: {},
+            totalMarks: {
+                endSemester: group.totalMarks.endSemester[studentNumber],
+                midSemester: group.totalMarks.midSemester[studentNumber],
+                totalMarks: group.totalMarks.totalMarks[studentNumber],
+
+            },
+        }
+        for (let [faculty, marks] of Object.entries(group.midSemesterMarks)) {
+
+            if (faculty === req.user._id) {
+                currentStudent.midSemesterMarks["evaluator"] = {
+                    presentation: marks.presentation[studentNumber],
+                    viva: marks.viva[studentNumber],
+                    implementation: marks.implementation[studentNumber],
+                };
+            }
+        }
+        for (let [faculty, marks] of Object.entries(group.endSemesterMarks)) {
+            if (faculty === req.user._id) {
+                currentStudent.endSemesterMarks["evaluator"] = {
+                    presentation: marks.presentation[studentNumber],
+                    viva: marks.viva[studentNumber],
+                    implementation: marks.implementation[studentNumber],
+                };
+            }
+        }
+        currentGroup.students.push(currentStudent);
+    }
+
+    studentMarks.push(currentGroup);
+
+    return res.status(200).json({
+        data: studentMarks,
+        success: true,
+        message: "MArks Fetched for Evaluator",
+    });
+}
+
+
+module.exports.saveStudentMarksEvaluator = async function(req, res) {
+    let record = await data.findById(sanitizer.escape(req.params.record_id));
+    if (!record) {
+        return res.status(404).json({
+            data: null,
+            success: false,
+            message: "Record not found",
+        });
+    }
+    let group = await groups.findById(sanitizer.escape(req.params.group_id));
+    if (!group) {
+        return res.status(404).json({
+            data: null,
+            success: false,
+            message: "Group not found",
+        });
+    }
+    if (!(record.evaluators.includes(req.user._id))) {
+        return res.status(403).json({
+            data: null,
+            success: false,
+            message: "Not allowed",
+        });
+    }
+    group.midSemesterMarks[req.user._id] = req.body.midSemesterMarks;
+    group.endSemesterMarks[req.user._id] = req.body.endSemesterMarks;
+
+    await group.markModified('endSemesterMarks');
+    await group.markModified('midSemesterMarks');
+    group = await group.save();
+
+    return res.status(200).json({
+        data: group,
+        success: true,
+        message: "Marks saved for group: " + group.GroupNumber,
     });
 }

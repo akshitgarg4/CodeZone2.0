@@ -14,6 +14,7 @@ router.get('/existing_marks/:record_id', auth.authenticateToken, data.fetchStude
 router.get('/mentor/marksFetch/:record_id', auth.authenticateToken, data.fetchStudentMarksMentor);
 router.post('/mentor/marksSave/:group_id', auth.authenticateToken, data.saveStudentMarksMentor);
 router.get('/evaluator/marksFetch/:record_id', auth.authenticateToken, data.fetchAllStudentsEvaluator);
-
+router.get('/evaluator/record_number/:record_id/group_number/:groupNumber', auth.authenticateToken, data.fetchGroupEvaluator);
+router.post('/evaluator/marksSave/:group_id/:record_id', auth.authenticateToken, data.saveStudentMarksEvaluator);
 
 module.exports = router;
