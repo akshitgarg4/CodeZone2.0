@@ -13,6 +13,7 @@ router.post('/send_email_to_evaluators/:record_id', auth.authenticateToken, data
 router.get('/existing_marks/:record_id', auth.authenticateToken, data.fetchStudentMarks);
 router.get('/mentor/marksFetch/:record_id', auth.authenticateToken, data.fetchStudentMarksMentor);
 router.post('/mentor/marksSave/:group_id', auth.authenticateToken, data.saveStudentMarksMentor);
+router.get('/evaluator/marksFetch/:record_id', auth.authenticateToken, data.fetchAllStudentsEvaluator);
 
 
 module.exports = router;

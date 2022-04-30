@@ -48,38 +48,37 @@ export default function EvaluatorPage() {
     if(!description){ setDescription(DATA?.description);
     setData(DATA?.data);}
 
-    // useEffect(() => {
-	// 	//Need to fetch complete data of the class which evaluator has to fill
-	// 	console.log(recordId);
-	// 	fetch(`/data/evaluator/marksFetch/${recordId}`, {
-	// 		headers: {
-	// 			Authorization: `Bearer ${localStorage.getItem('CodeZone2_Token')}`
-	// 		}
-	// 	})
-	// 		.then((response) => response.json())
-	// 		.then((data) => {
-	// 			if(data?.success){
-    //                 setDescription(data?.description);
-    //                 setData(data?.data);
-    // setPlayCircle(false);
-    //       setSuccess("Marks Fetched");
-    //       setTimeout(() => {
-    //         setSuccess("");
-    //       }, 8000);
-	// 			}
-    //             else{
-    //                 setPlayCircle(false);
-    //       setError("Error while fetching marks Plz try again");
-    //       setTimeout(() => {
-    //         setError("");
-    //       }, 8000);
-    //             }
-	// 		})
-	// 		.catch((err) => {
-	// 			console.log(err)
-	// 		});
-	// }, [recordId])
-    console.log(description,data);
+    useEffect(() => {
+		//Need to fetch complete data of the class which evaluator has to fill
+		console.log(recordId);
+		fetch(`/data/evaluator/marksFetch/${recordId}`, {
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem('CodeZone2_Token')}`
+			}
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				if(data?.success){
+          setDescription(data?.description);
+          setData(data?.data);
+          setPlayCircle(false);
+          setSuccess("Marks Fetched");
+          setTimeout(() => {
+            setSuccess("");
+          }, 8000);
+				}
+        else{
+          setPlayCircle(false);
+          setError("Error while fetching marks Plz try again");
+          setTimeout(() => {
+            setError("");
+          }, 8000);
+                }
+			})
+			.catch((err) => {
+				console.log(err)
+			});
+	}, [recordId])
   return (
     <>
     {playCircle && (
