@@ -101,7 +101,7 @@ class Sheet extends React.Component {
       presentation: [],
       viva: [],
       implementation: [],
-      report:[],
+      report: [],
     };
     for (
       let studentsIndex = 0;
@@ -193,47 +193,71 @@ class Sheet extends React.Component {
   render() {
     return (
       <Box m={2}>
-		  {(this.props.show==='Midsem' || this.props.show==='Both' ) && <>
-		  <h1>Mid-Semester Evaluation</h1>
-        <ReactDataSheet
-          data={this.state.gridMid}
-          valueRenderer={(cell) => cell.value}
-          onCellsChanged={(e) => this.onCellsChangedMid(e)}
-          sheetRenderer={(props) => (
-            <Table className={props.className + " my-awesome-extra-class"}>
-              <TableHead>
-                <TableRow>
-                  {InputGridHeaders.map((col, index) => (
-                    <TableCell key={index}>{col}</TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody>{props.children}</TableBody>
-            </Table>
-          )}
-        />
-		</>}
-		{(this.props.show==='Endsem' || this.props.show==='Both' ) && <><h1>End-Semester Evaluation</h1>
-        <ReactDataSheet
-          data={this.state.gridEnd}
-          valueRenderer={(cell) => cell.value}
-          onCellsChanged={(e) => this.onCellsChangedEnd(e)}
-          sheetRenderer={(props) => (
-            <Table className={props.className + " my-awesome-extra-class"}>
-              <TableHead>
-                <TableRow>
-                  {InputGridHeaders.map((col, index) => (
-                    <TableCell key={index}>{col}</TableCell>
-                  ))}
-                  <TableCell key={5}>Report</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>{props.children}</TableBody>
-            </Table>
-          )}
-        /></>}
-        <Button style={{ marginLeft: '41%',marginTop:20}} variant="contained"  color="error"><a style={{outline:'none',textDecoration:'none',color:'white'}} href={this.props?.url}>Back</a></Button>
-        <Button style={{ marginLeft: '2%',marginTop:20}} variant="contained" onClick={this.saveChanges}  color="success">Save</Button>
+        {(this.props.show === "Midsem" || this.props.show === "Both") && (
+          <>
+            <h1>Mid-Semester Evaluation</h1>
+            <ReactDataSheet
+              data={this.state.gridMid}
+              valueRenderer={(cell) => cell.value}
+              onCellsChanged={(e) => this.onCellsChangedMid(e)}
+              sheetRenderer={(props) => (
+                <Table className={props.className + " my-awesome-extra-class"}>
+                  <TableHead>
+                    <TableRow>
+                      {InputGridHeaders.map((col, index) => (
+                        <TableCell key={index}>{col}</TableCell>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>{props.children}</TableBody>
+                </Table>
+              )}
+            />
+          </>
+        )}
+        {(this.props.show === "Endsem" || this.props.show === "Both") && (
+          <>
+            <h1>End-Semester Evaluation</h1>
+            <ReactDataSheet
+              data={this.state.gridEnd}
+              valueRenderer={(cell) => cell.value}
+              onCellsChanged={(e) => this.onCellsChangedEnd(e)}
+              sheetRenderer={(props) => (
+                <Table className={props.className + " my-awesome-extra-class"}>
+                  <TableHead>
+                    <TableRow>
+                      {InputGridHeaders.map((col, index) => (
+                        <TableCell key={index}>{col}</TableCell>
+                      ))}
+                      <TableCell key={5}>Report</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>{props.children}</TableBody>
+                </Table>
+              )}
+            />
+          </>
+        )}
+        <Button
+          style={{ marginLeft: "41%", marginTop: 20 }}
+          variant="contained"
+          color="error"
+        >
+          <a
+            style={{ outline: "none", textDecoration: "none", color: "white" }}
+            href={this.props?.url}
+          >
+            Back
+          </a>
+        </Button>
+        <Button
+          style={{ marginLeft: "2%", marginTop: 20 }}
+          variant="contained"
+          onClick={this.saveChanges}
+          color="success"
+        >
+          Save
+        </Button>
         {this.state.error && (
           <Snackbar open={true} autoHideDuration={2000}>
             <Alert severity="error" sx={{ width: "100%" }}>

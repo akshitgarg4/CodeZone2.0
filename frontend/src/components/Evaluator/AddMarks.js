@@ -3,27 +3,29 @@ import { Grid } from "@mui/material";
 import Sheet from "./Sheet";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import MenuItem from '@mui/material/MenuItem';
+import MenuItem from "@mui/material/MenuItem";
 import { useLocation } from "react-router-dom";
-import Select from '@mui/material/Select';
+import Select from "@mui/material/Select";
 
 export default function AddMarks() {
   const location = useLocation();
-  const { id, recordId, url } = location?.state;
+  const { id, recordId, url, count } = location?.state;
   const [groupNumber, setGroupNumber] = useState(id);
   const [groupID, setGroupID] = useState("");
   const [dataFetched, setDataFetched] = useState(false);
   const [studentsData, setStudentsData] = useState([]);
   const [show, setShow] = React.useState("Midsem");
+  const items = new Array(count).fill(null);
   const handleChange = (event) => {
     setShow(event.target.value);
   };
+  const handleChange2 = (event) => {
+    setGroupNumber(event.target.value);
+  };
   useEffect(() => {
     if (groupNumber !== 0 && studentsData.length > 0 && groupID !== "") {
-      // console.log(studentsData, "EEE")
       setDataFetched(true);
     } else {
-      // console.log(studentsData, "QQ")
       setDataFetched(false);
     }
   }, [groupNumber, studentsData, groupID]);
@@ -55,7 +57,9 @@ export default function AddMarks() {
   }, [id, groupNumber, recordId]);
   return (
     <Grid container>
-      {!dataFetched && <h1>Fetching Data.....</h1>}
+      {!dataFetched && (
+        <h1 style={{ marginLeft: "30%" }}>Fetching Data.....</h1>
+      )}
       <Box
         m={3}
         sx={{
@@ -63,26 +67,29 @@ export default function AddMarks() {
           maxWidth: "100%",
         }}
       >
-        <TextField
+        <Select
           label="Group No"
           id="fullWidth"
-		  style={{ width: 500,margin:10 }}
-          defaultValue={groupNumber}
-          onChange={(e) => {
-            setGroupNumber(e.target.value);
-          }}
-        />
+          value={groupNumber}
+          onChange={handleChange2}
+          style={{ width: 500, margin: 10 }}
+        >
+          {items.map((_, idx) => (
+            <MenuItem value={idx + 1} key={idx}>
+              {idx + 1}
+            </MenuItem>
+          ))}
+        </Select>
         <Select
-		  label="Marks Field"
+          label="Marks Field"
           id="fullWidth"
           value={show}
           onChange={handleChange}
-		  style={{ width: 500, margin:10}}
+          style={{ width: 500, margin: 10 }}
         >
           <MenuItem value={"Midsem"}>Midsem</MenuItem>
           <MenuItem value={"Endsem"}>Endsem</MenuItem>
           <MenuItem value={"Both"}>All</MenuItem>
-
         </Select>
       </Box>
       {dataFetched && (
@@ -90,9 +97,10 @@ export default function AddMarks() {
           studentsData={studentsData}
           groupNumber={groupNumber}
           groupID={groupID}
-		  show={show}
+          show={show}
           recordID={recordId}
           url={url}
+          count={count}
         />
       )}
     </Grid>
