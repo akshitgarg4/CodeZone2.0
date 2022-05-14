@@ -248,7 +248,7 @@ class Sheet extends React.Component {
             </Table>
           )}
         />
-        <Button onClick={this.saveChanges}>Save</Button>
+        <Button style={{ marginLeft: '43%',marginTop:20}} variant="contained" onClick={this.saveChanges}>Save</Button>
         {this.state.error && (
           <Snackbar open={true} autoHideDuration={2000}>
             <Alert severity="error" sx={{ width: "100%" }}>
