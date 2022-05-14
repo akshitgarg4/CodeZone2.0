@@ -2,7 +2,6 @@ import React from "react";
 import ReactDataSheet from "react-datasheet";
 import { connect } from "react-redux";
 import "react-datasheet/lib/react-datasheet.css";
-
 //Mui
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -233,8 +232,8 @@ class Sheet extends React.Component {
             </Table>
           )}
         /></>}
-        
-        <Button style={{ marginLeft: '43%',marginTop:20}} variant="contained" onClick={this.saveChanges}>Save</Button>
+        <Button style={{ marginLeft: '41%',marginTop:20}} variant="contained"><a style={{outline:'none',textDecoration:'none',color:'white'}} href={this.props?.url}>Back</a></Button>
+        <Button style={{ marginLeft: '2%',marginTop:20}} variant="contained" onClick={this.saveChanges}>Save</Button>
         {this.state.error && (
           <Snackbar open={true} autoHideDuration={2000}>
             <Alert severity="error" sx={{ width: "100%" }}>

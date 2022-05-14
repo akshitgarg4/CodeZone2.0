@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import { useLocation } from 'react-router-dom';
 import {styled} from "@mui/material/styles";
 import Alert from "@mui/material/Alert";
 import {useNavigate, useParams} from "react-router-dom";
@@ -42,6 +43,8 @@ export default function EvaluatorPage(){
 	const [error, setError] = useState("");
 	const [success, setSuccess] = useState("");
 	const [playCircle, setPlayCircle] = useState(false);
+	const location = useLocation()
+	console.log("location",location?.pathname);
 	
 	//to be deleted once data works
 	if( !description){
@@ -174,6 +177,7 @@ export default function EvaluatorPage(){
 															state: {
 																id: row.GroupNumber,
 																recordId,
+																url:location?.pathname,
 															},
 														})
 													}

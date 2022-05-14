@@ -9,7 +9,7 @@ import Select from '@mui/material/Select';
 
 export default function AddMarks() {
   const location = useLocation();
-  const { id, recordId } = location?.state;
+  const { id, recordId, url } = location?.state;
   const [groupNumber, setGroupNumber] = useState(id);
   const [groupID, setGroupID] = useState("");
   const [dataFetched, setDataFetched] = useState(false);
@@ -92,6 +92,7 @@ export default function AddMarks() {
           groupID={groupID}
 		  show={show}
           recordID={recordId}
+          url={url}
         />
       )}
     </Grid>
