@@ -35,25 +35,31 @@ class App extends React.Component {
         <Router>
           <Nav />
           <Routes>
-            {!auth.isLoggedIn && <Route exact path="/" element={<Login />} />}
-            {auth.isLoggedIn && (
-              <Route exact path="/" element={<Classroom />} />
-            )}
-            {auth.isLoggedIn && (
-              <Route path="/mentor/:recordId" element={<Mentor />} />
-            )}
-            {auth.isLoggedIn && (
-              <Route path="/evaluator/:recordId" element={<EvaluatorPage />} />
-            )}
-            {auth.isLoggedIn && (
-              <Route path="/View-Data/:dataId" element={<ViewData />} />
-            )}
-            {auth.isLoggedIn && (
-              <Route path="/View-Marks/:dataId" element={<ViewMarks />} />
-            )}
-            {auth.isLoggedIn && (
-              <Route path="/add-marks/:groupId" element={<AddMarks />} />
-            )}
+            <Route
+              exact
+              path="/"
+              element={!auth?.isLoggedIn ? <Login /> : <Classroom />}
+            />
+            <Route
+              path="/mentor/:recordId"
+              element={!auth?.isLoggedIn ? <Login /> : <Mentor />}
+            />
+            <Route
+              path="/evaluator/:recordId"
+              element={!auth?.isLoggedIn ? <Login /> : <EvaluatorPage />}
+            />
+            <Route
+              path="/View-Data/:dataId"
+              element={!auth?.isLoggedIn ? <Login /> : <ViewData />}
+            />
+            <Route
+              path="/View-Marks/:dataId"
+              element={!auth?.isLoggedIn ? <Login /> : <ViewMarks />}
+            />
+            <Route
+              path="/add-marks/:groupId"
+              element={!auth?.isLoggedIn ? <Login /> : <AddMarks />}
+            />
             <Route component={Page404} />
           </Routes>
         </Router>
