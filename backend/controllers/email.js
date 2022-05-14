@@ -4,11 +4,8 @@ const {SECRET_MAIL} = require("../config/credentials");
 let transporter = nodemailer.createTransport({
 	service: 'gmail',
 	auth: {
-		type: 'OAuth2',
 		user: SECRET_MAIL.EMAIL,
-		clientId: SECRET_MAIL.CLIENT_ID,
-		clientSecret: SECRET_MAIL.CLIENT_SECRET_KEY,
-		refreshToken: SECRET_MAIL.REFRESH_TOKEN,
+		pass:'bnfchqdpmsectecq',
 	}
 });
 module.exports.sendMail = async function(recipients, subject, message){
