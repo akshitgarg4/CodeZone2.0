@@ -38,6 +38,7 @@ export default function AddMarks(){
 				if(data?.success){
 					setGroupNumber(data.data[0].GroupNumber);
 					setGroupID(data.data[0].groupID);
+					console.log(data?.data[0]?.students);
 					setStudentsData(data.data[0].students);
 				}
 			});

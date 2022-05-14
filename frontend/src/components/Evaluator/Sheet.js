@@ -11,12 +11,15 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import {Box} from "@mui/system";
 import {Button} from "@mui/material";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 const InputGridHeaders = ["Name", "Sid", "Presentation", "Viva", "Implementation"];
 
 class Sheet extends React.Component{
 	constructor(props){
 		super(props);
+		console.log(props);
 		// console.log(this.props, "RRRR");
 		let midSemesterMarks = [];
 		let endSemesterMarks = [];
@@ -44,6 +47,8 @@ class Sheet extends React.Component{
 			recordID: this.props.recordID,
 			gridMid: midSemesterMarks,
 			gridEnd: endSemesterMarks,
+			error: '',
+			success: '',
 		};
 		// console.log(this.state);
 	}
@@ -85,8 +90,24 @@ class Sheet extends React.Component{
 			.then((response) => response.json())
 			.then((data) => {
 				if(data?.success){
+					this.setState({
+						success:"Marks Saved!!"
+					})
+					setTimeout(() => {
+						this.setState({
+							success:""
+						})
+					}, 8000);
 					console.log("Saved");
 				} else{
+					this.setState({
+						error:"rror while saving marks!!"
+					})
+					setTimeout(() => {
+						this.setState({
+							error:""
+						})
+					}, 8000);
 					console.log("Failed");
 				}
 			})
@@ -152,6 +173,20 @@ class Sheet extends React.Component{
 					)}
 				/>
 				<Button onClick={this.saveChanges}>Save</Button>
+				{this.state.error && (
+				<Snackbar open={true} autoHideDuration={2000}>
+					<Alert severity="error" sx={{width: "100%"}}>
+						{this.state.error}
+					</Alert>
+				</Snackbar>
+			)}
+			{this.state.success && (
+				<Snackbar open={true} autoHideDuration={2000}>
+					<Alert severity="success" sx={{width: "100%"}}>
+						{this.state.success}
+					</Alert>
+				</Snackbar>
+			)}
 			</Box>
 		);
 	}
