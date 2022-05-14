@@ -44,21 +44,41 @@ const MentorPage = (props) => {
 				console.log(err)
 			});
 	}, [recordId])
+
+	const handleCode = (newValue) => {
+		setGroupNumber(newValue.target.value);
+  	};
 	
 	return (
-		<Grid container>
-			<Box
-				m={3}
-				sx={{
-					width: "100%",
-					maxWidth: "100%",
-				}}
-			>
-				<TextField fullWidth label="Group No" id="fullWidth"/>
-			</Box>
-			{dataFetched && <Sheet studentsData={studentsData} groupNumber={groupNumber} groupID={groupID}/>}
-		</Grid>
-	);
+    <Grid container>
+      <Box
+        m={3}
+        sx={{
+          width: "100%",
+          maxWidth: "100%",
+        }}
+      >
+        {dataFetched && (
+          <TextField
+            autoFocus
+            margin="dense"
+            type="integer"
+            placeholder="Enter Group No"
+            onChange={handleCode}
+            fullWidth
+            variant="standard"
+          />
+        )}
+      </Box>
+      {dataFetched && (
+        <Sheet
+          studentsData={studentsData}
+          groupNumber={groupNumber}
+          groupID={groupID}
+        />
+      )}
+    </Grid>
+  );
 }
 
 function mapStateToProps(state){
