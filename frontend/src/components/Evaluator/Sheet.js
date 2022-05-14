@@ -73,6 +73,11 @@ class Sheet extends React.Component {
           this.props.studentsData[studentsIndex].endSemesterMarks.evaluator
             .implementation,
       });
+      currentEnd.push({
+        value:
+          this.props.studentsData[studentsIndex].endSemesterMarks.evaluator
+            .report,
+      });
       endSemesterMarks.push(currentEnd);
     }
     this.state = {
@@ -97,6 +102,7 @@ class Sheet extends React.Component {
       presentation: [],
       viva: [],
       implementation: [],
+      report:[],
     };
     for (
       let studentsIndex = 0;
@@ -121,6 +127,9 @@ class Sheet extends React.Component {
       );
       endSemesterMarks.implementation.push(
         parseFloat(this.state.gridEnd[studentsIndex][4].value)
+      );
+      endSemesterMarks.report.push(
+        parseFloat(this.state.gridEnd[studentsIndex][5].value)
       );
     }
     // console.log(endSemesterMarks, midSemesterMarks);
@@ -151,7 +160,7 @@ class Sheet extends React.Component {
           }, 8000);
         } else {
           this.setState({
-            error: "rror while saving marks!!",
+            error: "Error while saving marks!!",
           });
           setTimeout(() => {
             this.setState({
@@ -217,6 +226,7 @@ class Sheet extends React.Component {
                   {InputGridHeaders.map((col, index) => (
                     <TableCell key={index}>{col}</TableCell>
                   ))}
+                  <TableCell key={5}>Report</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>{props.children}</TableBody>
