@@ -25,7 +25,9 @@ export default function AddMarks(){
 	}, [groupNumber, studentsData, groupID])
 	useEffect(() => {
 		// api to get the list of the group with existing marks by GroupNumber
-		// console.log(groupNumber);
+		if(groupNumber != ''){
+			setDataFetched(false);
+			console.log(groupNumber);
 		fetch(`/data/evaluator/record_number/${recordId}/group_number/${groupNumber}`, {
 			headers: {
 				"Content-Type": "application/x-www-form-urlencoded",
@@ -37,14 +39,18 @@ export default function AddMarks(){
 				
 				if(data?.success){
 					setGroupNumber(data.data[0].GroupNumber);
+					setDataFetched(true);
 					setGroupID(data.data[0].groupID);
 					console.log(data?.data[0]?.students);
 					setStudentsData(data.data[0].students);
+					console.log(groupID,groupNumber,studentsData,recordId);
 				}
 			});
+		}
 	}, [id, groupNumber, recordId]);
 	return (
 		<Grid container>
+			{!dataFetched && <h1>Fetching Data.....</h1>}
 			<Box
 				m={3}
 				sx={{
@@ -52,7 +58,7 @@ export default function AddMarks(){
 					maxWidth: "100%",
 				}}
 			>
-				<TextField fullWidth label="Group No" id="fullWidth" defaultValue={groupNumber}/>
+				<TextField fullWidth label="Group No" id="fullWidth" defaultValue={groupNumber} onChange = {(e)=>{setGroupNumber(e.target.value)}}/>
 			</Box>
 			{dataFetched &&
 				<Sheet studentsData={studentsData} groupNumber={groupNumber} groupID={groupID} recordID={recordId}/>}
