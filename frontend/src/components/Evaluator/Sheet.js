@@ -232,8 +232,8 @@ class Sheet extends React.Component {
             </Table>
           )}
         /></>}
-        <Button style={{ marginLeft: '41%',marginTop:20}} variant="contained"><a style={{outline:'none',textDecoration:'none',color:'white'}} href={this.props?.url}>Back</a></Button>
-        <Button style={{ marginLeft: '2%',marginTop:20}} variant="contained" onClick={this.saveChanges}>Save</Button>
+        <Button style={{ marginLeft: '41%',marginTop:20}} variant="contained"  color="error"><a style={{outline:'none',textDecoration:'none',color:'white'}} href={this.props?.url}>Back</a></Button>
+        <Button style={{ marginLeft: '2%',marginTop:20}} variant="contained" onClick={this.saveChanges}  color="success">Save</Button>
         {this.state.error && (
           <Snackbar open={true} autoHideDuration={2000}>
             <Alert severity="error" sx={{ width: "100%" }}>
