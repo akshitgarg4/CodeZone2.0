@@ -98,7 +98,17 @@ const MentorPage = (props) => {
             </MenuItem>
           ))}
         </Select>
-		
+		<Select
+          label="Marks Field"
+          id="fullWidth"
+          value={show}
+          onChange={handleChange3}
+          style={{ width: 500, margin: 10 }}
+        >
+          <MenuItem value={"Midsem"}>Midsem</MenuItem>
+          <MenuItem value={"Endsem"}>Endsem</MenuItem>
+          <MenuItem value={"Both"}>All</MenuItem>
+        </Select>
 			</Box>}
 			{dataFetched && <Sheet studentsData={studentsData} show={show} groupNumber={groupNumber} groupID={groupID}/>}
 		</Grid>
