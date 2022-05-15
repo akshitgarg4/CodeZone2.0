@@ -51,7 +51,6 @@ export default function AddMarks() {
             setStudentsData(data.data[0].students);
             console.log(groupID, groupNumber, studentsData, recordId);
           }
-          
         });
     }
   }, [id, groupNumber, recordId]);
