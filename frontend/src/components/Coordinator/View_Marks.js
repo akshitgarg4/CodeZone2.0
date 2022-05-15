@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation,Link } from "react-router-dom";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import CircularProgress from "@mui/material/CircularProgress";
 import Table2 from "./Table2";
+import Button from "@mui/material/Button";
 
 export default function ViewMarks() {
   const location = useLocation();
@@ -13,6 +14,7 @@ export default function ViewMarks() {
   const [existingMarks, setExistingMarks] = useState([]);
   const [evaluators, setEvaluators] = useState({});
   const [playCircle, setPlayCircle] = useState(true);
+  const [totalMarksArray, setTotalMarksArray] = useState([]);
 
   useEffect(() => {
     fetch(`/data/existing_marks/${id}`, {
@@ -28,6 +30,12 @@ export default function ViewMarks() {
           setExistingMarks(data?.data?.studentMarks);
           setEvaluators(data?.data?.evaluator);
           setPlayCircle(false);
+          let totalMarksArrayTemp = [];
+          for(let index=0;index<data?.data?.studentMarks.length;index++){
+            totalMarksArrayTemp.push(data?.data?.studentMarks[index].totalMarks.totalMarks);
+          }
+          setTotalMarksArray(totalMarksArrayTemp)
+          console.log(totalMarksArrayTemp,"RYR");
           setSuccess("Marks Fetched");
           setTimeout(() => {
             setSuccess("");
@@ -65,6 +73,16 @@ export default function ViewMarks() {
             {success}
           </Alert>
         </Snackbar>
+      )}
+      {!playCircle && (
+        <Link
+        to={{
+          pathname: "/grading",
+          state: { payload: totalMarksArray },
+        }}
+      >
+        <Button>Visualize Grading</Button>
+      </Link> 
       )}
       {!playCircle && (
         <Table2

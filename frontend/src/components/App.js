@@ -7,6 +7,8 @@ import Classroom from "./Coordinator/Coordinator_Page";
 import Mentor from "./MentorPage/MentorPage";
 import ViewData from "./Coordinator/View_File";
 import ViewMarks from "./Coordinator/View_Marks";
+import GradeResult from "./Coordinator/GradeResults";
+
 
 import { Paper } from "@mui/material";
 // @ts-ignore
@@ -60,6 +62,12 @@ class App extends React.Component {
               path="/add-marks/:groupId"
               element={!auth?.isLoggedIn ? <Login /> : <AddMarks />}
             />
+            {auth?.isLoggedIn && (
+            <Route
+              path="/grading"
+              component={GradeResult}
+            />
+            )}
             <Route component={Page404} />
           </Routes>
         </Router>
