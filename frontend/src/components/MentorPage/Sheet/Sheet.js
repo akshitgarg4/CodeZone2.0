@@ -214,7 +214,7 @@ class Sheet extends React.Component {
       <Box m={2}>
         {(this.props.show === "Midsem" || this.props.show === "Both") && (
           <>
-            <h1>Mid-Semester Evaluation</h1>
+            <h1 style={{ marginLeft: "33%" }}>Mid-Semester Evaluation</h1>
             <ReactDataSheet
               data={this.state.gridMid}
               valueRenderer={(cell) => cell.value}
@@ -224,7 +224,7 @@ class Sheet extends React.Component {
                   <TableHead>
                     <TableRow>
                       {InputGridHeaders.map((col, index) => (
-                        <TableCell key={index}>{col}</TableCell>
+                        <TableCell key={index}  style={{fontWeight:700}}>{col}</TableCell>
                       ))}
                     </TableRow>
                   </TableHead>
@@ -236,7 +236,7 @@ class Sheet extends React.Component {
         )}
         {(this.props.show === "Endsem" || this.props.show === "Both") && (
           <>
-            <h1>End-Semester Evaluation</h1>
+            <h1 style={{ marginLeft: "33%" }}>End-Semester Evaluation</h1>
             <ReactDataSheet
               data={this.state.gridEnd}
               valueRenderer={(cell) => cell.value}
@@ -246,7 +246,7 @@ class Sheet extends React.Component {
                   <TableHead>
                     <TableRow>
                       {InputGridHeaders.map((col, index) => (
-                        <TableCell key={index}>{col}</TableCell>
+                        <TableCell key={index} style={{fontWeight:700}}>{col}</TableCell>
                       ))}
                     </TableRow>
                   </TableHead>
