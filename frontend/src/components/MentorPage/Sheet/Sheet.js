@@ -210,9 +210,10 @@ class Sheet extends React.Component {
   };
 
   render() {
+
     return (
       <Box m={2}>
-        <h1>Mid-Semester Evaluation</h1>
+        {(this.props.show === "Midsem" || this.props.show === "Both") && <><h1>Mid-Semester Evaluation</h1>
         <ReactDataSheet
           data={this.state.gridMid}
           valueRenderer={(cell) => cell.value}
@@ -229,8 +230,8 @@ class Sheet extends React.Component {
               <TableBody>{props.children}</TableBody>
             </Table>
           )}
-        />
-        <h1>End-Semester Evaluation</h1>
+        /></>}
+        {(this.props.show === "Endsem" || this.props.show === "Both") && <><h1>End-Semester Evaluation</h1>
         <ReactDataSheet
           data={this.state.gridEnd}
           valueRenderer={(cell) => cell.value}
@@ -247,7 +248,7 @@ class Sheet extends React.Component {
               <TableBody>{props.children}</TableBody>
             </Table>
           )}
-        />
+        /></>}
         <Button style={{ marginLeft: '43%',marginTop:20}} variant="contained" onClick={this.saveChanges}>Save</Button>
         {this.state.error && (
           <Snackbar open={true} autoHideDuration={2000}>

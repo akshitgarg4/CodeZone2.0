@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Grid } from "@mui/material";
 import Sheet from "./Sheet";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import { useLocation } from "react-router-dom";
 import Select from "@mui/material/Select";
@@ -52,6 +51,7 @@ export default function AddMarks() {
             setStudentsData(data.data[0].students);
             console.log(groupID, groupNumber, studentsData, recordId);
           }
+          
         });
     }
   }, [id, groupNumber, recordId]);
