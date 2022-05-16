@@ -27,7 +27,33 @@ function valuetext(value) {
 
 export default function GradeResults (props) {
   console.log(props.payload);
-  const studentScores = props.payload;
+  const studentScores = [
+    95,
+    75,
+    80,
+    55,
+    59,
+    61,
+    79,
+    47,
+    67,
+    56,
+    45,
+    57,
+    32,
+    22,
+    14,
+    61,
+    81,
+    83,
+    71,
+    65,
+    53,
+    49,
+    77,
+    87,
+    77
+];
 
   let datasetSize = studentScores.length;
   let mean = 0;
@@ -39,7 +65,7 @@ export default function GradeResults (props) {
     sumOfScores += studentScores[i];
   }
   mean = sumOfScores / datasetSize;
-
+console.log(mean,"mean");
   //Calculate the standard deviation
 
   // Assigning (value - mean) ^ 2 to every array item
@@ -49,12 +75,13 @@ export default function GradeResults (props) {
 
   // Calculating the sum of updated array
   let sum = copyOfScores.reduce((acc, curr) => acc + curr, 0);
+  console.log(sum,"sum");
 
   // Standered deviation
   // eslint-disable-next-line
-  const [standardDeviation, setstandardDeviation] = useState(
-    Math.sqrt(sum / copyOfScores.length)
-  );
+  const standardDeviation = Math.sqrt(sum / copyOfScores.length)
+console.log(standardDeviation,copyOfScores.length,Math.sqrt(sum / copyOfScores.length),"standardDeviation");
+
 
   const [marksA, setmarksA] = useState(mean + 1.5 * standardDeviation);
   const [marksBP, setmarksBP] = useState(mean + 1 * standardDeviation);
@@ -74,6 +101,7 @@ export default function GradeResults (props) {
   let noOfFGrades = 0;
   for (let i = 0; i < studentScores.length; i++) {
     if (studentScores[i] >= marksA) {
+      console.log("hi");
       noOfAPGrades += 1;
     } else if (studentScores[i] >= marksBP && studentScores[i] < marksA) {
       noOfAGrades += 1;
