@@ -43,9 +43,10 @@ export default function ViewData(props) {
   const location = useLocation();
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const [evaluators, setEvaluators] = useState(['Akshit Garg']);
+  const [evaluators, setEvaluators] = useState(["18103042 akshit garg"]);
   const [finalEvaluators, setFinalEvaluators] = useState([]);
   const { data, description, id } = location?.state;
+  console.log("data###############", data);
   // useEffect(() => {
   //   // api to get the list of all the evaluators mapped in the backend
   //   console.log(id);
@@ -109,12 +110,8 @@ export default function ViewData(props) {
       }),
     })
       .then((response) => response.json())
-      .then((data) => {
-        console.log("@@@@@@@@@@@@@@@@@@@@@", data);
-      })
-      .catch((err) => {
-        console.log("@@@@@@@@@@@@@@@@@@@@@", err);
-      });
+      .then((data) => {})
+      .catch((err) => {});
     fetch(`/data/send_email_to_evaluators/${id}`, {
       method: "POST",
       headers: {
@@ -192,16 +189,21 @@ export default function ViewData(props) {
           <TableHead>
             <TableRow>
               <StyledTableCell>S. No.</StyledTableCell>
-              <StyledTableCell align="right">SID A</StyledTableCell>
               <StyledTableCell align="right">Student A</StyledTableCell>
-              <StyledTableCell align="right">SID B</StyledTableCell>
+              <StyledTableCell align="right">SID A</StyledTableCell>
+
               <StyledTableCell align="right">Student B</StyledTableCell>
-              <StyledTableCell align="right">SID C</StyledTableCell>
+              <StyledTableCell align="right">SID B</StyledTableCell>
+
               <StyledTableCell align="right">Student C</StyledTableCell>
-              <StyledTableCell align="right">SID D</StyledTableCell>
+              <StyledTableCell align="right">SID C</StyledTableCell>
+
               <StyledTableCell align="right">Student D</StyledTableCell>
-              <StyledTableCell align="right">SID E</StyledTableCell>
+              <StyledTableCell align="right">SID D</StyledTableCell>
+
               <StyledTableCell align="right">Student E</StyledTableCell>
+              <StyledTableCell align="right">SID E</StyledTableCell>
+
               <StyledTableCell align="right">Mentor</StyledTableCell>
             </TableRow>
           </TableHead>

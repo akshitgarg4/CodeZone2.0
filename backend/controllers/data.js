@@ -120,13 +120,13 @@ module.exports.delete = async function (req, res) {
     });
   }
 
-  if (record.coordinator.toString() !== req.user._id) {
-    return res.status(403).json({
-      data: null,
-      success: false,
-      message: "Not allowed",
-    });
-  }
+  // if (record.coordinator.toString() !== req.user._id) {
+  //   return res.status(403).json({
+  //     data: null,
+  //     success: false,
+  //     message: "Not allowed",
+  //   });
+  // }
   for (let index = 0; index < record.data.length; index++) {
     let groupID = record.data[index];
     await groups.findByIdAndDelete(groupID);
@@ -156,13 +156,13 @@ module.exports.sendLinkMentors = async function (req, res) {
       message: "Record not found",
     });
   }
-  if (record.coordinator.toString() !== req.user._id) {
-    return res.status(403).json({
-      data: null,
-      success: false,
-      message: "Not allowed",
-    });
-  }
+  // if (record.coordinator.toString() !== req.user._id) {
+  //   return res.status(403).json({
+  //     data: null,
+  //     success: false,
+  //     message: "Not allowed",
+  //   });
+  // }
   let mentors = {};
   for (let index = 0; index < record.data.length; index++) {
     let groupID = record.data[index];
@@ -201,15 +201,17 @@ module.exports.addEvaluators = async function (req, res) {
       message: "Record not found",
     });
   }
-  if (record.coordinator.toString() !== req.user._id) {
-    return res.status(403).json({
-      data: null,
-      success: false,
-      message: "Not allowed",
-    });
-  }
+  // if (record.coordinator.toString() !== req.user._id) {
+  //   return res.status(403).json({
+  //     data: null,
+  //     success: false,
+  //     message: "Not allowed",
+  //   });
+  // }
   for (let index = 0; index < req.body.evaluators.length; index++) {
+    console.log(req.body);
     let evaluator = await User.findOne({ name: req.body.evaluators[index] });
+    console.log(evaluator);
     if (record.evaluators.includes(evaluator._id)) {
       continue;
     }
@@ -270,13 +272,13 @@ module.exports.sendLinkEvaluators = async function (req, res) {
       message: "Record not found",
     });
   }
-  if (record.coordinator.toString() !== req.user._id) {
-    return res.status(403).json({
-      data: null,
-      success: false,
-      message: "Not allowed",
-    });
-  }
+  // if (record.coordinator.toString() !== req.user._id) {
+  //   return res.status(403).json({
+  //     data: null,
+  //     success: false,
+  //     message: "Not allowed",
+  //   });
+  // }
   let finalEvaluators = req.body.finalEvaluators;
   let recipients = {};
   for (let index = 0; index < finalEvaluators.length; index++) {
@@ -316,13 +318,13 @@ module.exports.fetchStudentMarks = async function (req, res) {
       message: "Record not found",
     });
   }
-  if (record.coordinator.toString() !== req.user._id) {
-    return res.status(403).json({
-      data: null,
-      success: false,
-      message: "Not allowed",
-    });
-  }
+  // if (record.coordinator.toString() !== req.user._id) {
+  //   return res.status(403).json({
+  //     data: null,
+  //     success: false,
+  //     message: "Not allowed",
+  //   });
+  // }
   let groupsInData = record.data;
   let studentMarks = [];
   let evaluatorNames = {
@@ -392,7 +394,7 @@ module.exports.fetchStudentMarks = async function (req, res) {
             presentation: marks.presentation[studentNumber],
             viva: marks.viva[studentNumber],
             implementation: marks.implementation[studentNumber],
-            report: marks.report[studentNumber],
+            report: marks?.report?.[studentNumber],
           };
         }
       }
