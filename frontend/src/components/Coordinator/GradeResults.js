@@ -25,9 +25,9 @@ function valuetext(value) {
   return `${value} Marks`;
 }
 
-const GradeResult = (props) => {
-  console.log(props.location.state.payload,"EEEE");
-  const studentScores = props.location.state.payload;
+export default function GradeResults (props) {
+  console.log(props.payload);
+  const studentScores = props.payload;
 
   let datasetSize = studentScores.length;
   let mean = 0;
@@ -347,4 +347,3 @@ const GradeResult = (props) => {
   );
 };
 
-export default GradeResult;

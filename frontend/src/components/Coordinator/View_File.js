@@ -43,27 +43,27 @@ export default function ViewData(props) {
   const location = useLocation();
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const [evaluators, setEvaluators] = useState([]);
+  const [evaluators, setEvaluators] = useState(['Akshit Garg']);
   const [finalEvaluators, setFinalEvaluators] = useState([]);
   const { data, description, id } = location?.state;
-  useEffect(() => {
-    // api to get the list of all the evaluators mapped in the backend
-    console.log(id);
-    fetch(`/data/evaluators_list`, {
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: `Bearer ${localStorage.getItem("CodeZone2_Token")}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data, "WW");
-        if (data?.success) {
-          console.log(data, "RR");
-          setEvaluators(data?.data);
-        }
-      });
-  }, []);
+  // useEffect(() => {
+  //   // api to get the list of all the evaluators mapped in the backend
+  //   console.log(id);
+  //   fetch(`/data/evaluators_list`, {
+  //     headers: {
+  //       "Content-Type": "application/x-www-form-urlencoded",
+  //       Authorization: `Bearer ${localStorage.getItem("CodeZone2_Token")}`,
+  //     },
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log(data, "WW");
+  //       if (data?.success) {
+  //         console.log(data, "RR");
+  //         setEvaluators(data?.data);
+  //       }
+  //     });
+  // }, []);
   const handleSend = (id) => {
     console.log("send called", id);
     //on click of this send email with mentor page to all the mentors present on that excell sheet

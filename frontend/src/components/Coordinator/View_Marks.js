@@ -5,6 +5,7 @@ import Snackbar from "@mui/material/Snackbar";
 import CircularProgress from "@mui/material/CircularProgress";
 import Table2 from "./Table2";
 import Button from "@mui/material/Button";
+import GradeResults from "./GradeResults";
 
 export default function ViewMarks() {
   const location = useLocation();
@@ -74,22 +75,26 @@ export default function ViewMarks() {
           </Alert>
         </Snackbar>
       )}
-      {!playCircle && (
-        <Link
-        to={{
-          pathname: "/grading",
-          state: { payload: totalMarksArray },
-        }}
-      >
-        <Button>Visualize Grading</Button>
-      </Link> 
-      )}
+      
       {!playCircle && (
         <Table2
           existingMarks={existingMarks}
           existingEvaluators={evaluators}
           description={description}
         />
+      )}
+      {!playCircle && (
+      //   <Link
+      //   to={{
+      //     pathname: "/grading",
+      //     state: { payload: totalMarksArray },
+      //   }}
+      // >
+      <>
+        <Button>Visualize Grading</Button>
+        <GradeResults payload={totalMarksArray} />
+        </>
+      // </Link> 
       )}
     </>
   );
